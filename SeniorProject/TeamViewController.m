@@ -64,7 +64,7 @@
          }
          else
          {
-             user.activeParty = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+             [user.activeParty setData:responseObject];
 
              //manual segue
              [self performSegueWithIdentifier:@"teamSelectedSegue" sender:self];

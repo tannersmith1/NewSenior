@@ -1,4 +1,5 @@
 <?php
+//TEST
 // Helper method to get a string description for an HTTP status code
 // From http://www.gen-x-design.com/archives/create-a-rest-api-with-php/ 
 function getStatusCodeMessage($status)
@@ -52,7 +53,7 @@ function getStatusCodeMessage($status)
  
     return (isset($codes[$status])) ? $codes[$status] : '';
 }
- 
+ //Test
 // Helper method to send a HTTP response code/message
 function sendResponse($status = 200, $body = '', $content_type = 'text/html')
 {
@@ -62,7 +63,7 @@ function sendResponse($status = 200, $body = '', $content_type = 'text/html')
     echo $body;
 }
 
-class GetPartyAPI
+class RemoveMemberAPI
 {
 	private $db;
 	private $conn;
@@ -70,6 +71,7 @@ class GetPartyAPI
 	// Constructor - open DB connection
 	function __construct() 
 	{
+        echo "\ncontructing\n";
 		$conn = mysql_connect('localhost', 'root', 'root');
 		if(!mysql_select_db("senior"))
 		{
@@ -84,59 +86,40 @@ class GetPartyAPI
 		$this->db->close();
 	}
 
-	//Return all the members given a party name
-	function GetParty()
+	//creates the account of the id that is posted
+	function RemoveMember()
 	{
-        
-        if (isset($_POST["teamname"]) )
+        echo "in function\n";
+        if (isset($_POST["username"]) && isset($_POST["teamname"]) )
         {
-            
-            
-			//mysql_real_escape_string() used to sainitize input strings
-			$teamname = mysql_real_escape_string($_POST["teamname"]);
+            echo "passed if";
+            //mysql_real_escape_string() used to sainitize input strings
+            $username = mysql_real_escape_string($_POST["username"]);
+            $teamname = mysql_real_escape_string($_POST["teamname"]);
+            //checks to see if the team exists
 			
-			
-			//checks to see if player exists
-			$result = mysql_query("select partyid from party where partyname='$teamname'");
-			if( mysql_num_rows( $result ) == 0)
-			{
-				echo "FALSE";
-			}
-			else
-			{				
-				
-                
-                echo "\n";
-                //Party Members
-                $result = mysql_query("call party_members('$teamname')");
-                $partyMembers = array();
-                $count = 0;
-                
-                while ($row = mysql_fetch_assoc($result))
-                {
-                    $partyMembers[$count] = $row["username"];
-                    $partyLeader = $row["leader"];
-                    $count = $count + 1;
-                }
-                
-                
-                $partyData = array('name' => $teamname, 'leader' => $partyLeader, 'members' => $partyMembers);
-                
-                echo json_encode($partyData);
-             
-			 }
-            
-		}
+            //Team exists, so delete it
+            $result = mysql_query("call remove_member('$username', '$teamname')");
+            if(!$result)
+            {
+                echo "FALSE";
+            }
+            else
+            {
+                echo "TRUE";
+            }
+        }
+		
 		else
 		{
-			echo "Needs teamname";
+			echo "needs username, teamname\n";
 		}
-        
-        
+         
 	}
 }
 
-$api = new GetPartyAPI;
-$api->GetParty();
+echo "lol\n\n\n\n";
+$api = new RemoveMemberAPI;
+$api->RemoveMember();
 unset($api);
 ?>

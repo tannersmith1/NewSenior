@@ -46,6 +46,9 @@
 		519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C071893688F005375DA /* JoinTeamViewController.m */; };
 		51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */; };
 		51A0D19F1898CF300090FCA8 /* getMembers.php in Resources */ = {isa = PBXBuildFile; fileRef = 51A0D19E1898CF300090FCA8 /* getMembers.php */; };
+		51E240DA1898FED60038A70E /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E240D91898FED60038A70E /* RosterViewController.m */; };
+		51E240DC189903E10038A70E /* deleteTeam.php in Resources */ = {isa = PBXBuildFile; fileRef = 51E240DB189903E10038A70E /* deleteTeam.php */; };
+		51E240DE1899077E0038A70E /* removeMember.php in Resources */ = {isa = PBXBuildFile; fileRef = 51E240DD1899077E0038A70E /* removeMember.php */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,10 @@
 		51A0D19B1898C6AB0090FCA8 /* TeamMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMenuViewController.h; sourceTree = "<group>"; };
 		51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMenuViewController.m; sourceTree = "<group>"; };
 		51A0D19E1898CF300090FCA8 /* getMembers.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = getMembers.php; path = ../../../../../Applications/MAMP/htdocs/getMembers.php; sourceTree = "<group>"; };
+		51E240D81898FED60038A70E /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
+		51E240D91898FED60038A70E /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		51E240DB189903E10038A70E /* deleteTeam.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = deleteTeam.php; path = ../../../../../Applications/MAMP/htdocs/deleteTeam.php; sourceTree = "<group>"; };
+		51E240DD1899077E0038A70E /* removeMember.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = removeMember.php; path = ../../../../../Applications/MAMP/htdocs/removeMember.php; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +185,8 @@
 		513F88A31886754A00374B02 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				51E240DD1899077E0038A70E /* removeMember.php */,
+				51E240DB189903E10038A70E /* deleteTeam.php */,
 				519C79FC1895B7FB0036E917 /* joinTeam.php */,
 				519E3C0418935E2C005375DA /* createTeam.php */,
 				513F88A41886757E00374B02 /* createAccount.php */,
@@ -281,6 +290,8 @@
 				519E3C071893688F005375DA /* JoinTeamViewController.m */,
 				51A0D19B1898C6AB0090FCA8 /* TeamMenuViewController.h */,
 				51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */,
+				51E240D81898FED60038A70E /* RosterViewController.h */,
+				51E240D91898FED60038A70E /* RosterViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -388,9 +399,11 @@
 			files = (
 				513F88A71886757E00374B02 /* createAccount.php in Resources */,
 				519C79FD1895B7FB0036E917 /* joinTeam.php in Resources */,
+				51E240DC189903E10038A70E /* deleteTeam.php in Resources */,
 				519E3C0518935E2C005375DA /* createTeam.php in Resources */,
 				51A0D19F1898CF300090FCA8 /* getMembers.php in Resources */,
 				518C5BC6188368C100D8FF8F /* Images.xcassets in Resources */,
+				51E240DE1899077E0038A70E /* removeMember.php in Resources */,
 				513F88A91886757E00374B02 /* logout.php in Resources */,
 				513F88A81886757E00374B02 /* login.php in Resources */,
 				518C5BB8188368C100D8FF8F /* InfoPlist.strings in Resources */,
@@ -427,6 +440,7 @@
 				518C5BC4188368C100D8FF8F /* MainMenuViewController.m in Sources */,
 				519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */,
 				513F889B1886624600374B02 /* AFHTTPRequestOperationManager.m in Sources */,
+				51E240DA1898FED60038A70E /* RosterViewController.m in Sources */,
 				513F87AC1886443000374B02 /* RegisterViewController.m in Sources */,
 				519E3C001891F329005375DA /* TeamViewController.m in Sources */,
 				513F88A11886624600374B02 /* AFURLResponseSerialization.m in Sources */,

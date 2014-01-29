@@ -10,9 +10,10 @@
 
 @interface cParty : NSObject
 
-@property (nonatomic, weak)NSString *name;
+@property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *leader;
 @property (nonatomic, strong)NSMutableArray *members;
 
+- (void)setData:(NSData *)data;
 
 @end

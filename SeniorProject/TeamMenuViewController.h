@@ -11,5 +11,6 @@
 @interface TeamMenuViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
+@property (weak, nonatomic) IBOutlet UITextView *resultsTextView;
 
 @end
