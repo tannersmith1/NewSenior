@@ -30,7 +30,7 @@ CREATE TABLE `Player` (
   `player_password` varchar(50) NOT NULL,
   PRIMARY KEY (`playerid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `Player` (
 
 LOCK TABLES `Player` WRITE;
 /*!40000 ALTER TABLE `Player` DISABLE KEYS */;
-INSERT INTO `Player` VALUES (1,'Tanner','password'),(2,'Ted','PW2'),(3,'t','t'),(4,'tann','k'),(5,'','');
+INSERT INTO `Player` VALUES (1,'Tanner','password'),(2,'Ted','PW2'),(3,'t','t'),(4,'tann','k'),(5,'',''),(6,'b','b'),(7,'tempa','a');
 /*!40000 ALTER TABLE `Player` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `party` (
   `isprivate` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`partyid`),
   UNIQUE KEY `partyName_UNIQUE` (`partyName`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `party` (
 
 LOCK TABLES `party` WRITE;
 /*!40000 ALTER TABLE `party` DISABLE KEYS */;
-INSERT INTO `party` VALUES (10,'Chaps','tanner','a',1),(11,'Chimps','tanner','2',0),(12,'Test','tanner','4',0),(13,'ukl','tanner','',1),(14,'ty','tanner','i',0),(15,'three','tanner','1',1),(16,'mine','t','1',0),(17,'yuka','tanner','',1);
+INSERT INTO `party` VALUES (11,'Chimps','tanner','2',0),(13,'ukl','tanner','',1),(17,'yuka','tanner','',1),(20,'teama','tempa','',0);
 /*!40000 ALTER TABLE `party` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `player_party` (
 
 LOCK TABLES `player_party` WRITE;
 /*!40000 ALTER TABLE `player_party` DISABLE KEYS */;
-INSERT INTO `player_party` VALUES (1,10),(2,10),(3,10),(1,11),(2,11),(3,11),(1,12),(1,13),(3,13),(1,14),(1,15),(3,16),(1,17),(3,17);
+INSERT INTO `player_party` VALUES (1,11),(1,17),(7,20);
 /*!40000 ALTER TABLE `player_party` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,11 +154,32 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `party_members`( ipartyname VARCHAR(45))
 begin
-select player.username
+select player.username, party.leader
 from player
 inner join player_party on player.playerID = player_party.playerID
 inner join party on party.partyid = player_party.partyID
 where  party.partyName = ipartyname;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `remove_member` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `remove_member`( iplayername VARCHAR(45), ipartyname VARCHAR(45))
+begin
+select @playerID := playerid from player where player.username = iplayername;
+select @partyID := partyid from party where party.partyname = ipartyname;
+delete from player_party where player_party.playerID = @playerID and player_party.partyID = @partyID;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -175,4 +196,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-28 22:54:53
+-- Dump completed on 2014-02-01 11:34:01

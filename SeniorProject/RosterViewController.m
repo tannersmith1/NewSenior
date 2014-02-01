@@ -30,7 +30,7 @@
 {
     //Post to web server, if credentials exist, move to main menu page
     cUserSingleton *user = [cUserSingleton getInstance];
-    if([user.username isEqualToString:user.activeParty.leader] && ![user.username isEqualToString:self.selectedMember])
+    if([user.username isEqualToString:user.activeParty.leader] && ![user.username isEqualToString:[self.selectedMember lowercaseString]])
     {
        NSString *url = @"http://localhost:8888/removeMember.php";
        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
