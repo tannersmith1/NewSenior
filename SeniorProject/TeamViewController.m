@@ -49,7 +49,9 @@
     //Retrieve party data from database based on name
     //Post to web server, if credentials exist, move to main menu page
     
-    NSString *url = @"http://localhost:8888/getMembers.php";
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/getMembers.php", baseURL];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSDictionary *params = @{@"teamname": user.activeParty.name };

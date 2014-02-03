@@ -32,7 +32,9 @@
     cUserSingleton *user = [cUserSingleton getInstance];
     if([user.username isEqualToString:user.activeParty.leader] && ![user.username isEqualToString:[self.selectedMember lowercaseString]])
     {
-       NSString *url = @"http://localhost:8888/removeMember.php";
+        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+        NSString *url = [NSString stringWithFormat:@"%@/removeMember.php", baseURL];
+
        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
        NSDictionary *params = @{@"username": self.selectedMember,

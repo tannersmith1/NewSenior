@@ -57,8 +57,9 @@
     //post to web server
     {
         
-        
-        NSString *url = @"http://localhost:8888/joinTeam.php";
+        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+        NSString *url = [NSString stringWithFormat:@"%@/joinTeam.php", baseURL];
+
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         NSDictionary *params = @{@"username": username,

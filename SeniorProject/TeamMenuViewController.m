@@ -23,8 +23,9 @@
     {
         //Post delete to web server
         //Post to web server, if credentials exist, move to main menu page
+        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+        NSString *url = [NSString stringWithFormat:@"%@/deleteTeam.php", baseURL];
         
-        NSString *url = @"http://localhost:8888/deleteTeam.php";
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         NSDictionary *params = @{@"username": user.username,

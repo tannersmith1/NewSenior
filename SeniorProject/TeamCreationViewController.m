@@ -31,7 +31,8 @@
         cUserSingleton *user = [cUserSingleton getInstance];
         
         NSString *username = user.username;
-        NSString *url = @"http://localhost:8888/createTeam.php";
+        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+        NSString *url = [NSString stringWithFormat:@"%@/createTeam.php", baseURL];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         NSDictionary *params = @{@"username": username,

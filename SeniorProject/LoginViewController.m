@@ -27,7 +27,8 @@
     //Post to web server, if credentials exist, move to main menu page
     
     self.resultsTextView.text = @"Login button pressed";
-    NSString *url = @"http://localhost:8888/login.php";
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/login.php", baseURL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSDictionary *params = @{@"username": username,

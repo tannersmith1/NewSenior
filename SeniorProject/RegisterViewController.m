@@ -24,8 +24,9 @@
     if ( ![username isEqualToString:@""] && ![password isEqualToString:@""] && [password isEqualToString:rePassword] )
     {
         
-    
-        NSString *url = @"http://localhost:8888/createAccount.php";
+        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+        NSString *url = [NSString stringWithFormat:@"%@/createAccount.php", baseURL];
+
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         NSDictionary *params = @{@"username": username,

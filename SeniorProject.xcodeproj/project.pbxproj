@@ -18,9 +18,6 @@
 		513F88A01886624600374B02 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F88951886624600374B02 /* AFURLRequestSerialization.m */; };
 		513F88A11886624600374B02 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F88971886624600374B02 /* AFURLResponseSerialization.m */; };
 		513F88A21886624600374B02 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F88991886624600374B02 /* AFURLSessionManager.m */; };
-		513F88A71886757E00374B02 /* createAccount.php in Resources */ = {isa = PBXBuildFile; fileRef = 513F88A41886757E00374B02 /* createAccount.php */; };
-		513F88A81886757E00374B02 /* login.php in Resources */ = {isa = PBXBuildFile; fileRef = 513F88A51886757E00374B02 /* login.php */; };
-		513F88A91886757E00374B02 /* logout.php in Resources */ = {isa = PBXBuildFile; fileRef = 513F88A61886757E00374B02 /* logout.php */; };
 		518C5BAE188368C100D8FF8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C5BAD188368C100D8FF8F /* Foundation.framework */; };
 		518C5BB0188368C100D8FF8F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C5BAF188368C100D8FF8F /* CoreGraphics.framework */; };
 		518C5BB2188368C100D8FF8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C5BB1188368C100D8FF8F /* UIKit.framework */; };
@@ -39,16 +36,12 @@
 		518C5BED188380C200D8FF8F /* cParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C5BEC188380C200D8FF8F /* cParty.m */; };
 		518C5BF0188382CE00D8FF8F /* cUserSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C5BEF188382CE00D8FF8F /* cUserSingleton.m */; };
 		518C5BF3188382F600D8FF8F /* cPartyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C5BF2188382F600D8FF8F /* cPartyManager.m */; };
-		519C79FD1895B7FB0036E917 /* joinTeam.php in Resources */ = {isa = PBXBuildFile; fileRef = 519C79FC1895B7FB0036E917 /* joinTeam.php */; };
+		5191E9A718A01E7200201F2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5191E9A618A01E7200201F2E /* Localizable.strings */; };
 		519E3C001891F329005375DA /* TeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3BFF1891F328005375DA /* TeamViewController.m */; };
 		519E3C031891FD43005375DA /* cPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C021891FD43005375DA /* cPlayerManager.m */; };
-		519E3C0518935E2C005375DA /* createTeam.php in Resources */ = {isa = PBXBuildFile; fileRef = 519E3C0418935E2C005375DA /* createTeam.php */; };
 		519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C071893688F005375DA /* JoinTeamViewController.m */; };
 		51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */; };
-		51A0D19F1898CF300090FCA8 /* getMembers.php in Resources */ = {isa = PBXBuildFile; fileRef = 51A0D19E1898CF300090FCA8 /* getMembers.php */; };
 		51E240DA1898FED60038A70E /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E240D91898FED60038A70E /* RosterViewController.m */; };
-		51E240DC189903E10038A70E /* deleteTeam.php in Resources */ = {isa = PBXBuildFile; fileRef = 51E240DB189903E10038A70E /* deleteTeam.php */; };
-		51E240DE1899077E0038A70E /* removeMember.php in Resources */ = {isa = PBXBuildFile; fileRef = 51E240DD1899077E0038A70E /* removeMember.php */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,9 +78,6 @@
 		513F88971886624600374B02 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		513F88981886624600374B02 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		513F88991886624600374B02 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		513F88A41886757E00374B02 /* createAccount.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = createAccount.php; path = ../../../../../Applications/MAMP/htdocs/createAccount.php; sourceTree = "<group>"; };
-		513F88A51886757E00374B02 /* login.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = login.php; path = ../../../../../Applications/MAMP/htdocs/login.php; sourceTree = "<group>"; };
-		513F88A61886757E00374B02 /* logout.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = logout.php; path = ../../../../../Applications/MAMP/htdocs/logout.php; sourceTree = "<group>"; };
 		518C5BAA188368C100D8FF8F /* SeniorProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeniorProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		518C5BAD188368C100D8FF8F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		518C5BAF188368C100D8FF8F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,21 +105,17 @@
 		518C5BEF188382CE00D8FF8F /* cUserSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cUserSingleton.m; sourceTree = "<group>"; };
 		518C5BF1188382F600D8FF8F /* cPartyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPartyManager.h; sourceTree = "<group>"; };
 		518C5BF2188382F600D8FF8F /* cPartyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cPartyManager.m; sourceTree = "<group>"; };
-		519C79FC1895B7FB0036E917 /* joinTeam.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = joinTeam.php; path = ../../../../../Applications/MAMP/htdocs/joinTeam.php; sourceTree = "<group>"; };
+		5191E9A618A01E7200201F2E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		519E3BFE1891F328005375DA /* TeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamViewController.h; sourceTree = "<group>"; };
 		519E3BFF1891F328005375DA /* TeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamViewController.m; sourceTree = "<group>"; };
 		519E3C011891FD43005375DA /* cPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPlayerManager.h; sourceTree = "<group>"; };
 		519E3C021891FD43005375DA /* cPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cPlayerManager.m; sourceTree = "<group>"; };
-		519E3C0418935E2C005375DA /* createTeam.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = createTeam.php; path = ../../../../../Applications/MAMP/htdocs/createTeam.php; sourceTree = "<group>"; };
 		519E3C061893688F005375DA /* JoinTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinTeamViewController.h; sourceTree = "<group>"; };
 		519E3C071893688F005375DA /* JoinTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinTeamViewController.m; sourceTree = "<group>"; };
 		51A0D19B1898C6AB0090FCA8 /* TeamMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMenuViewController.h; sourceTree = "<group>"; };
 		51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMenuViewController.m; sourceTree = "<group>"; };
-		51A0D19E1898CF300090FCA8 /* getMembers.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = getMembers.php; path = ../../../../../Applications/MAMP/htdocs/getMembers.php; sourceTree = "<group>"; };
 		51E240D81898FED60038A70E /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		51E240D91898FED60038A70E /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
-		51E240DB189903E10038A70E /* deleteTeam.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = deleteTeam.php; path = ../../../../../Applications/MAMP/htdocs/deleteTeam.php; sourceTree = "<group>"; };
-		51E240DD1899077E0038A70E /* removeMember.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = removeMember.php; path = ../../../../../Applications/MAMP/htdocs/removeMember.php; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,14 +171,6 @@
 		513F88A31886754A00374B02 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				51E240DD1899077E0038A70E /* removeMember.php */,
-				51E240DB189903E10038A70E /* deleteTeam.php */,
-				519C79FC1895B7FB0036E917 /* joinTeam.php */,
-				519E3C0418935E2C005375DA /* createTeam.php */,
-				513F88A41886757E00374B02 /* createAccount.php */,
-				513F88A51886757E00374B02 /* login.php */,
-				51A0D19E1898CF300090FCA8 /* getMembers.php */,
-				513F88A61886757E00374B02 /* logout.php */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -250,6 +228,7 @@
 				518C5BB6188368C100D8FF8F /* InfoPlist.strings */,
 				518C5BB9188368C100D8FF8F /* main.m */,
 				518C5BBB188368C100D8FF8F /* SeniorProject-Prefix.pch */,
+				5191E9A618A01E7200201F2E /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -397,15 +376,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				513F88A71886757E00374B02 /* createAccount.php in Resources */,
-				519C79FD1895B7FB0036E917 /* joinTeam.php in Resources */,
-				51E240DC189903E10038A70E /* deleteTeam.php in Resources */,
-				519E3C0518935E2C005375DA /* createTeam.php in Resources */,
-				51A0D19F1898CF300090FCA8 /* getMembers.php in Resources */,
 				518C5BC6188368C100D8FF8F /* Images.xcassets in Resources */,
-				51E240DE1899077E0038A70E /* removeMember.php in Resources */,
-				513F88A91886757E00374B02 /* logout.php in Resources */,
-				513F88A81886757E00374B02 /* login.php in Resources */,
+				5191E9A718A01E7200201F2E /* Localizable.strings in Resources */,
 				518C5BB8188368C100D8FF8F /* InfoPlist.strings in Resources */,
 				518C5BC1188368C100D8FF8F /* Main.storyboard in Resources */,
 			);
