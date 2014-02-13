@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cParty.h"
 
-@interface cPartyManager : NSObject {
-    
-    cParty *_party;
-}
+@interface cPartyManager : NSObject 
+
+@property (nonatomic,weak)id delegate;
 
 - (void)createPartyWithName:(NSString *)partyName;
+- (void)getMembersFromParty:(NSString *)partyName;
 
 
 @end

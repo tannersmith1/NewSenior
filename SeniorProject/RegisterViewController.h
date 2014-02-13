@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol RegisterDelegate
+- (void)registerSuccess:(NSString *)text;
+- (void)registerFailed:(NSString *)msg;
+@end
 
-
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : UIViewController <RegisterDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextField *rePasswordField;
 @property (weak, nonatomic) IBOutlet UITextView *resultsTextView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *whirligig;
 
+- (void)registerSuccess:(NSString *)text;
+- (void)registerFailed:(NSString *)msg;
 @end

@@ -15,4 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (weak, nonatomic) IBOutlet UIButton *joinButton;
 
+- (void)getMembersSuccess;
+- (void)getMembersFailed:(NSString *)msg;
+
 @end

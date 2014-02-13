@@ -9,6 +9,7 @@
 #import "TeamViewController.h"
 #import "cUserSingleton.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "cPartyManager.h"
 
 @interface TeamViewController ()
 
@@ -33,56 +34,35 @@
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)getMembersSuccess
 {
-    return 1;
+    [self performSegueWithIdentifier:@"teamSelectedSegue" sender:self];
+}
+
+- (void)getMembersFailed:(NSString *)msg
+{
+    //No results window on this page
+    NSLog(@"Get Members Failed: %@", msg);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //retrieve name at indexPath
-    NSString *teamSelected = [teamArray objectAtIndex:indexPath.row];
+    NSString *selectedParty = [teamArray objectAtIndex:indexPath.row];
     cUserSingleton *user = [cUserSingleton getInstance];
-    user.activeParty.name = teamSelected;
+    user.activeParty.name = selectedParty;
     
     
     //Retrieve party data from database based on name
     //Post to web server, if credentials exist, move to main menu page
-    
-    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-    NSString *url = [NSString stringWithFormat:@"%@/getMembers.php", baseURL];
+    cPartyManager *mgr = [[cPartyManager alloc] init];
+    mgr.delegate = self;
+    [mgr getMembersFromParty:selectedParty];
+}
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSDictionary *params = @{@"teamname": user.activeParty.name };
-    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-         NSLog(text);
-         //MANUAL SEGUE HERE
-         if ([text isEqualToString:@"FALSE"])
-         {
-             NSLog(@"Server Echoed False");
-         }
-         else
-         {
-             [user.activeParty setData:responseObject];
-
-             //manual segue
-             [self performSegueWithIdentifier:@"teamSelectedSegue" sender:self];
-         }
-         
-         
-     }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         NSLog([error localizedDescription]);
-     }];
-    
-    
-    
-    
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -102,6 +82,7 @@
     cell.textLabel.text = [teamArray objectAtIndex:indexPath.row];
     return cell;
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

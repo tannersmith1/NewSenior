@@ -23,42 +23,32 @@
     //Retrieve data from UI
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
-    
-    //Post to web server, if credentials exist, move to main menu page
-    
-    self.resultsTextView.text = @"Login button pressed";
-    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-    NSString *url = [NSString stringWithFormat:@"%@/login.php", baseURL];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSDictionary *params = @{@"username": username,
-                             @"password": password};
-    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+    if ( ![username isEqualToString:@""] && ![password isEqualToString:@""] )
     {
-        NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        self.resultsTextView.text = text;
-        //MANUAL SEGUE HERE
-        if ([text isEqualToString:@"FALSE"])
-        {
-            self.resultsTextView.text = @"Username and password are incorrect";
-        }
-        else
-        {
-            cUserSingleton *user = [cUserSingleton getInstance];
-            NSArray *parties = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-            user.parties = [[NSMutableArray alloc] initWithArray:parties];
-            user.username = [[NSString alloc] initWithString:username];
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
-        }
-        
-
+        //Post to web server, if credentials exist, move to main menu page
+        [self.whirligig startAnimating];
+    
+        cPlayerManager *mgr = [[cPlayerManager alloc] init];
+        mgr.delegate = self;
+        [mgr loginWithUsername:username AndPassword:password];
     }
-        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    else
     {
-        self.resultsTextView.text = [error localizedDescription];
-    }];
+        self.resultsTextView.text = @"Please enter a username and password";
+    }
     
-     
+}
+
+- (void)loginSuccess
+{
+    [self.whirligig stopAnimating];
+    [self performSegueWithIdentifier:@"loginSegue" sender:self];
+}
+
+- (void)loginFailed:(NSString *)msg
+{
+    [self.whirligig stopAnimating];
+    self.resultsTextView.text = msg;
 }
 
 //-----------------------------------------------------------------------

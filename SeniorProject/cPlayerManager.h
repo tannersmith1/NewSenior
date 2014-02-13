@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RegisterViewController.h"
+#import "LoginViewController.h"
 
 @interface cPlayerManager : NSObject
 

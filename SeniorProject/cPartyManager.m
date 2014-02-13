@@ -7,6 +7,9 @@
 //
 
 #import "cPartyManager.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "cUserSingleton.h"
+#import "TeamViewController.h"
 
 @implementation cPartyManager
 
@@ -23,6 +26,40 @@
                                             cancelButtonTitle:@"OK"
                                             otherButtonTitles:nil];
     [message show];
+}
+
+- (void)getMembersFromParty:(NSString *)partyName
+{
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/getMembers.php", baseURL];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *params = @{@"teamname": partyName };
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+         
+         
+         if ([text isEqualToString:@"FALSE"])
+         {
+             [self.delegate getMembersFailed:@"Web Server: False"];
+         }
+         else
+         {
+             cUserSingleton *user = [cUserSingleton getInstance];
+             [user.activeParty setData:responseObject];
+             
+             //Tell the view controller that everything succeeded
+             [self.delegate getMembersSuccess];
+         }
+         
+         
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self.delegate getMembersFailed:[error localizedDescription]];
+     }];
 }
 
 

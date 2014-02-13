@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "cPlayerManager.h"
 
 @interface RegisterViewController ()
 
@@ -23,37 +24,37 @@
     
     if ( ![username isEqualToString:@""] && ![password isEqualToString:@""] && [password isEqualToString:rePassword] )
     {
+        cPlayerManager *mgr = [[cPlayerManager alloc] init];
+        mgr.delegate = self;
         
-        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-        NSString *url = [NSString stringWithFormat:@"%@/createAccount.php", baseURL];
 
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        NSDictionary *params = @{@"username": username,
-                                 @"password": password};
-    
-        [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
-         {
-             NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             self.resultsTextView.text = text;
-             if ([text isEqualToString:@"TRUE"])
-             {
-                 self.resultsTextView.text = @"Your account has been created";
-             }
-             else
-             {
-                 self.resultsTextView.text = @"Username taken, please try another";
-             }
-         }
-              failure:^(AFHTTPRequestOperation *operation, NSError *error)
-         {
-             self.resultsTextView.text = [error localizedDescription];
-         }];
+        [self.whirligig startAnimating];
+        [mgr registerWithUsername:username AndPassword:password];
+        
     }
     else
     {
         self.resultsTextView.text = @"Passwords do not match or fields are empty";
     }
+}
+
+- (void)registerSuccess:(NSString *)text
+{
+
+    [self.whirligig stopAnimating];
+    if ([text isEqualToString:@"TRUE"])
+    {
+        self.resultsTextView.text = @"Your account has been created";
+    }
+    else
+    {
+        self.resultsTextView.text = @"Username taken, please try another";
+    }}
+
+- (void)registerFailed:(NSString *)msg
+{
+    [self.whirligig stopAnimating];
+    self.resultsTextView.text = msg;
 }
 
 //--------------------------------------------------
