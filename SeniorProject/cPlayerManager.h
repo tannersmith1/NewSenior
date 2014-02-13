@@ -10,6 +10,7 @@
 
 @interface cPlayerManager : NSObject
 
+@property (nonatomic,weak)id delegate;
 
 - (void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password;
 - (void)registerWithUsername:(NSString *)username AndPassword:(NSString *)password;
