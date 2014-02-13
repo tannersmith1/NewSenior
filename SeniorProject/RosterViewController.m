@@ -9,6 +9,7 @@
 #import "RosterViewController.h"
 #import "cUserSingleton.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "cPartyManager.h"
 
 @interface RosterViewController ()
 
@@ -32,42 +33,28 @@
     cUserSingleton *user = [cUserSingleton getInstance];
     if([user.username isEqualToString:user.activeParty.leader] && ![user.username isEqualToString:[self.selectedMember lowercaseString]])
     {
-        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-        NSString *url = [NSString stringWithFormat:@"%@/removeMember.php", baseURL];
-
-       AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-       manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-       NSDictionary *params = @{@"username": self.selectedMember,
-                                @"teamname": user.activeParty.name};
-       [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
-       {
-            NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-         
-            //MANUAL SEGUE HERE
-            if ([text isEqualToString:@"FALSE"])
-            {
-                NSLog(@"Member does not exist");
-            }
-            else
-            {
-                NSLog(@"Member removed");
-                [user.activeParty.members removeObject:self.selectedMember];
-                self.teamArray = user.activeParty.members;
-                [self.teamsTable reloadData];
-                [self viewDidAppear:YES];
-            }
-         
-         
-        }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error)
-        {
-            NSLog([error localizedDescription]);
-        }];
+        cPartyManager *mgr = [[cPartyManager alloc] init];
+        mgr.delegate = self;
+        [mgr deleteMember:self.selectedMember FromTeam:user.activeParty.name];
     }
     else
     {
         NSLog(@"Only party leaders cannot delete team members Or cannot delete yourself");
     }
+}
+
+- (void)deleteMemberSuccess:(NSString *)msg
+{
+    cUserSingleton *user = [cUserSingleton getInstance];
+    
+    self.teamArray = user.activeParty.members;
+    [self.teamsTable reloadData];
+    [self viewDidAppear:YES];
+}
+
+- (void)deleteMemberFailed:(NSString *)msg
+{
+    //NSLog(msg);
 }
 
 
@@ -77,6 +64,15 @@
 	// Do any additional setup after loading the view.
     cUserSingleton *user = [cUserSingleton getInstance];
     self.teamArray = [NSArray arrayWithArray:user.activeParty.members];
+    
+    if ([user.username isEqualToString:user.activeParty.leader])
+    {
+        self.deleteMemberButton.hidden = FALSE;
+    }
+    else
+    {
+        self.deleteMemberButton.hidden = TRUE;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,6 +80,8 @@
     cUserSingleton *user = [cUserSingleton getInstance];
     self.teamArray = [NSArray arrayWithArray:user.activeParty.members];
     [self.teamsTable reloadData];
+    
+    
 }
 
 

@@ -326,9 +326,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5c-9G-wUk">
-                                <rect key="frame" x="124" y="263" width="52" height="30"/>
+                                <rect key="frame" x="96" y="264" width="108" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Delete">
+                                <state key="normal" title="Delete Team">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -360,13 +360,19 @@
                                     <segue destination="icD-0j-lwQ" kind="push" id="FI5-Pb-ArG"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="x83-Km-Y5i">
+                                <rect key="frame" x="212" y="269" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="J88-Be-f6A"/>
                     <connections>
+                        <outlet property="deleteTeamButton" destination="K5c-9G-wUk" id="7Qs-Vw-F1G"/>
                         <outlet property="resultsTextView" destination="lTV-vB-313" id="UwV-pS-aVL"/>
                         <outlet property="teamNameLabel" destination="Gul-es-VUR" id="yY8-Om-O9e"/>
+                        <outlet property="whirligig" destination="x83-Km-Y5i" id="z8K-6r-vas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FTK-re-VX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -458,9 +464,9 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIu-hZ-grd">
-                                <rect key="frame" x="51" y="70" width="44" height="30"/>
+                                <rect key="frame" x="51" y="70" width="113" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Delete">
+                                <state key="normal" title="Delete Member">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -472,6 +478,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="0hl-pc-jvn"/>
                     <connections>
+                        <outlet property="deleteMemberButton" destination="wIu-hZ-grd" id="1lP-Aa-o1v"/>
                         <outlet property="teamsTable" destination="QCb-DP-MBd" id="Q5q-Fc-l6w"/>
                     </connections>
                 </viewController>
@@ -554,6 +561,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hdg-wb-CCu">
+                                <rect key="frame" x="195" y="302" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -563,6 +574,7 @@
                         <outlet property="privateSwitcher" destination="DZt-T5-own" id="1NE-55-O5x"/>
                         <outlet property="pwField" destination="H9s-D8-hyJ" id="QDv-Mq-A7T"/>
                         <outlet property="resultsTextView" destination="91I-IN-zO1" id="wbb-zU-o9h"/>
+                        <outlet property="whirligig" destination="hdg-wb-CCu" id="ykG-cN-vba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zc0-vs-Igl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -635,6 +647,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4GW-i3-IFK">
+                                <rect key="frame" x="172" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -643,6 +659,7 @@
                         <outlet property="passwordField" destination="jx4-Qm-Q3y" id="PMa-iA-C1e"/>
                         <outlet property="resultTextView" destination="6f7-aM-dG4" id="sGM-n7-gzR"/>
                         <outlet property="teamNameField" destination="Wwt-ai-9VS" id="hKO-Bf-EBy"/>
+                        <outlet property="whirligig" destination="4GW-i3-IFK" id="9eU-GR-ttw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ck-Tz-jt5" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,14 +10,17 @@
 
 
 
-@interface TeamCreationViewController : UIViewController {
-    
-}
+@interface TeamCreationViewController : UIViewController
 
 - (IBAction)createButtonPressed:(id)sender;
+- (void)createPartySuccess:(NSString *)msg;
+- (void)createPartyFailed:(NSString *)msg;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *pwField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *privateSwitcher;
 @property (weak, nonatomic) IBOutlet UITextView *resultsTextView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *whirligig;
 
 @end

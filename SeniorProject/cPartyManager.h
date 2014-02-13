@@ -13,8 +13,13 @@
 
 @property (nonatomic,weak)id delegate;
 
-- (void)createPartyWithName:(NSString *)partyName;
+- (void)createPartyWithName:(NSString *)teamName AndPassword:(NSString *)pw AndPublic:(NSString *)publicPrivate;
+- (void)joinPartyWithName:(NSString *)teamName AndPassword:(NSString *)pw;
+//Uses data from singleton to post
+- (void)deleteActiveParty;
+//Saves the selected party information into the user singleton
 - (void)getMembersFromParty:(NSString *)partyName;
+- (void)deleteMember:(NSString *)memberName FromTeam:(NSString *)teamName;
 
 
 @end

@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface JoinTeamViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *whirligig;
 @property (weak, nonatomic) IBOutlet UITextField *teamNameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextView *resultTextView;
 - (IBAction)joinButtonPressed:(id)sender;
+- (void)joinPartySuccess:(NSString *)msg;
+- (void)joinPartyFailed:(NSString *)msg;
 
 @end

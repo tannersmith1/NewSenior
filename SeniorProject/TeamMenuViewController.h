@@ -10,7 +10,12 @@
 
 @interface TeamMenuViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *whirligig;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *resultsTextView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteTeamButton;
+
+- (void)deleteSuccess:(NSString *)msg;
+- (void)deleteFailed:(NSString *)msg;
 
 @end

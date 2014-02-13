@@ -9,6 +9,7 @@
 #import "TeamCreationViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "cUserSingleton.h"
+#import "cPartyManager.h"
 
 @interface TeamCreationViewController ()
 
@@ -26,44 +27,31 @@
     NSString *publicPrivate = [self.privateSwitcher titleForSegmentAtIndex:self.privateSwitcher.selectedSegmentIndex];
     
     if(![teamName isEqualToString:@""])
-    //post to web server
+    //Post to web server
     {
-        cUserSingleton *user = [cUserSingleton getInstance];
+        [self.whirligig startAnimating];
         
-        NSString *username = user.username;
-        NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-        NSString *url = [NSString stringWithFormat:@"%@/createTeam.php", baseURL];
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        NSDictionary *params = @{@"username": username,
-                                 @"password": pw,
-                                 @"teamname": teamName,
-                                 @"private": publicPrivate};
-        
-        [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
-         {
-             NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             self.resultsTextView.text = text;
-             if ([text isEqualToString:@"TRUE"])
-             {
-                 self.resultsTextView.text = @"Your Team has been created";
-                 [user.parties addObject:teamName];
-             }
-             else
-             {
-                 self.resultsTextView.text = @"Team name taken, please try another";
-             }
-         }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-         {
-             self.resultsTextView.text = [error localizedDescription];
-         }];
+        cPartyManager *mgr = [[cPartyManager alloc] init];
+        mgr.delegate = self;
+        [mgr createPartyWithName:teamName AndPassword:pw AndPublic:publicPrivate];
     }
     else
     {
         self.resultsTextView.text = @"Please input a name";
     }
     
+}
+
+- (void)createPartySuccess:(NSString *)msg
+{
+    [self.whirligig stopAnimating];
+    self.resultsTextView.text = msg;
+}
+
+- (void)createPartyFailed:(NSString *)msg
+{
+    [self.whirligig stopAnimating];
+    self.resultsTextView.text = msg;
 }
 
 //-------------------------------------------------------------------

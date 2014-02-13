@@ -10,7 +10,11 @@
 
 @interface RosterViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteMemberButton;
 @property (nonatomic,strong)NSArray *teamArray;
 @property (nonatomic,weak)IBOutlet UITableView *teamsTable;
 @property (nonatomic, strong)NSString *selectedMember;
+
+- (void)deleteMemberSuccess:(NSString *)msg;
+- (void)deleteMemberFailed:(NSString *)msg;
 @end
