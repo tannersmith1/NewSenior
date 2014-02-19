@@ -22,6 +22,7 @@
     cUserSingleton *user = [cUserSingleton getInstance];
     if([user.activeParty.members count] == 1 && [user.activeParty.leader isEqualToString:user.username])
     {
+        //TODO:UIAlertView to ask if user is sure they want to delete team
         [self.whirligig startAnimating];
         //Post delete to web server
         cPartyManager *mgr = [[cPartyManager alloc] init];

@@ -37,6 +37,11 @@
 		518C5BF0188382CE00D8FF8F /* cUserSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C5BEF188382CE00D8FF8F /* cUserSingleton.m */; };
 		518C5BF3188382F600D8FF8F /* cPartyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C5BF2188382F600D8FF8F /* cPartyManager.m */; };
 		5191E9A718A01E7200201F2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5191E9A618A01E7200201F2E /* Localizable.strings */; };
+		5191E9AA18B3F62000201F2E /* SetupCompetitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191E9A918B3F62000201F2E /* SetupCompetitionViewController.m */; };
+		5191E9EE18B42F9F00201F2E /* cCompetitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191E9ED18B42F9F00201F2E /* cCompetitionManager.m */; };
+		5191E9F018B4501600201F2E /* createCompetition.php in Resources */ = {isa = PBXBuildFile; fileRef = 5191E9EF18B4501600201F2E /* createCompetition.php */; };
+		5191E9F318B4560400201F2E /* cCompetition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191E9F218B4560400201F2E /* cCompetition.m */; };
+		5191E9F918B46DF000201F2E /* SubmitWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191E9F818B46DF000201F2E /* SubmitWeightViewController.m */; };
 		519E3C001891F329005375DA /* TeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3BFF1891F328005375DA /* TeamViewController.m */; };
 		519E3C031891FD43005375DA /* cPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C021891FD43005375DA /* cPlayerManager.m */; };
 		519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C071893688F005375DA /* JoinTeamViewController.m */; };
@@ -106,6 +111,15 @@
 		518C5BF1188382F600D8FF8F /* cPartyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPartyManager.h; sourceTree = "<group>"; };
 		518C5BF2188382F600D8FF8F /* cPartyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cPartyManager.m; sourceTree = "<group>"; };
 		5191E9A618A01E7200201F2E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		5191E9A818B3F62000201F2E /* SetupCompetitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupCompetitionViewController.h; sourceTree = "<group>"; };
+		5191E9A918B3F62000201F2E /* SetupCompetitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupCompetitionViewController.m; sourceTree = "<group>"; };
+		5191E9EC18B42F9F00201F2E /* cCompetitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cCompetitionManager.h; sourceTree = "<group>"; };
+		5191E9ED18B42F9F00201F2E /* cCompetitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cCompetitionManager.m; sourceTree = "<group>"; };
+		5191E9EF18B4501600201F2E /* createCompetition.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = createCompetition.php; path = ../../../../../../Applications/MAMP/htdocs/createCompetition.php; sourceTree = "<group>"; };
+		5191E9F118B4560400201F2E /* cCompetition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cCompetition.h; sourceTree = "<group>"; };
+		5191E9F218B4560400201F2E /* cCompetition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cCompetition.m; sourceTree = "<group>"; };
+		5191E9F718B46DF000201F2E /* SubmitWeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitWeightViewController.h; sourceTree = "<group>"; };
+		5191E9F818B46DF000201F2E /* SubmitWeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitWeightViewController.m; sourceTree = "<group>"; };
 		519E3BFE1891F328005375DA /* TeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamViewController.h; sourceTree = "<group>"; };
 		519E3BFF1891F328005375DA /* TeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamViewController.m; sourceTree = "<group>"; };
 		519E3C011891FD43005375DA /* cPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPlayerManager.h; sourceTree = "<group>"; };
@@ -171,6 +185,7 @@
 		513F88A31886754A00374B02 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				5191E9EF18B4501600201F2E /* createCompetition.php */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -271,6 +286,10 @@
 				51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */,
 				51E240D81898FED60038A70E /* RosterViewController.h */,
 				51E240D91898FED60038A70E /* RosterViewController.m */,
+				5191E9A818B3F62000201F2E /* SetupCompetitionViewController.h */,
+				5191E9A918B3F62000201F2E /* SetupCompetitionViewController.m */,
+				5191E9F718B46DF000201F2E /* SubmitWeightViewController.h */,
+				5191E9F818B46DF000201F2E /* SubmitWeightViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -282,6 +301,8 @@
 				518C5BEC188380C200D8FF8F /* cParty.m */,
 				518C5BEE188382CE00D8FF8F /* cUserSingleton.h */,
 				518C5BEF188382CE00D8FF8F /* cUserSingleton.m */,
+				5191E9F118B4560400201F2E /* cCompetition.h */,
+				5191E9F218B4560400201F2E /* cCompetition.m */,
 			);
 			name = BO;
 			sourceTree = "<group>";
@@ -293,6 +314,8 @@
 				518C5BF2188382F600D8FF8F /* cPartyManager.m */,
 				519E3C011891FD43005375DA /* cPlayerManager.h */,
 				519E3C021891FD43005375DA /* cPlayerManager.m */,
+				5191E9EC18B42F9F00201F2E /* cCompetitionManager.h */,
+				5191E9ED18B42F9F00201F2E /* cCompetitionManager.m */,
 			);
 			name = BOL;
 			sourceTree = "<group>";
@@ -377,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				518C5BC6188368C100D8FF8F /* Images.xcassets in Resources */,
+				5191E9F018B4501600201F2E /* createCompetition.php in Resources */,
 				5191E9A718A01E7200201F2E /* Localizable.strings in Resources */,
 				518C5BB8188368C100D8FF8F /* InfoPlist.strings in Resources */,
 				518C5BC1188368C100D8FF8F /* Main.storyboard in Resources */,
@@ -400,6 +424,7 @@
 			files = (
 				513F889E1886624600374B02 /* AFSecurityPolicy.m in Sources */,
 				513F87A91886441A00374B02 /* LoginViewController.m in Sources */,
+				5191E9F918B46DF000201F2E /* SubmitWeightViewController.m in Sources */,
 				513F889D1886624600374B02 /* AFNetworkReachabilityManager.m in Sources */,
 				518C5BF0188382CE00D8FF8F /* cUserSingleton.m in Sources */,
 				513F889F1886624600374B02 /* AFURLConnectionOperation.m in Sources */,
@@ -407,9 +432,12 @@
 				513F889C1886624600374B02 /* AFHTTPSessionManager.m in Sources */,
 				513F88A01886624600374B02 /* AFURLRequestSerialization.m in Sources */,
 				51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */,
+				5191E9F318B4560400201F2E /* cCompetition.m in Sources */,
 				518C5BF3188382F600D8FF8F /* cPartyManager.m in Sources */,
+				5191E9EE18B42F9F00201F2E /* cCompetitionManager.m in Sources */,
 				513F88A21886624600374B02 /* AFURLSessionManager.m in Sources */,
 				518C5BC4188368C100D8FF8F /* MainMenuViewController.m in Sources */,
+				5191E9AA18B3F62000201F2E /* SetupCompetitionViewController.m in Sources */,
 				519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */,
 				513F889B1886624600374B02 /* AFHTTPRequestOperationManager.m in Sources */,
 				51E240DA1898FED60038A70E /* RosterViewController.m in Sources */,

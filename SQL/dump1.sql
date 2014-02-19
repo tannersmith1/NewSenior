@@ -30,7 +30,7 @@ CREATE TABLE `Player` (
   `player_password` varchar(50) NOT NULL,
   PRIMARY KEY (`playerid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,8 +39,39 @@ CREATE TABLE `Player` (
 
 LOCK TABLES `Player` WRITE;
 /*!40000 ALTER TABLE `Player` DISABLE KEYS */;
-INSERT INTO `Player` VALUES (1,'Tanner','password'),(2,'Ted','PW2'),(3,'t','t'),(4,'tann','k'),(5,'',''),(6,'b','b'),(7,'tempa','a');
+INSERT INTO `Player` VALUES (1,'Tanner','password'),(2,'Ted','PW2'),(3,'t','t'),(4,'tann','k'),(5,'',''),(6,'b','b'),(7,'tempa','a'),(8,'duh','d'),(9,'r','r'),(10,'o','o'),(11,'z','z');
 /*!40000 ALTER TABLE `Player` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `competition`
+--
+
+DROP TABLE IF EXISTS `competition`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `competition` (
+  `competitionid` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `partyid` mediumint(9) NOT NULL,
+  `startdate` datetime NOT NULL,
+  `enddate` datetime NOT NULL,
+  `iselimination` tinyint(1) NOT NULL,
+  `frequency` varchar(45) NOT NULL,
+  `cycles` int(11) NOT NULL,
+  PRIMARY KEY (`competitionid`),
+  KEY `partyid` (`partyid`),
+  CONSTRAINT `competition_ibfk_1` FOREIGN KEY (`partyid`) REFERENCES `party` (`partyid`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `competition`
+--
+
+LOCK TABLES `competition` WRITE;
+/*!40000 ALTER TABLE `competition` DISABLE KEYS */;
+INSERT INTO `competition` VALUES (9,13,'2020-02-18 00:00:00','2014-03-18 00:00:00',1,'Monthly',1),(10,11,'2014-02-21 04:00:23','2014-03-28 03:00:23',1,'Weekly',5),(11,25,'2014-02-19 04:00:33','2014-03-26 03:00:33',1,'Weekly',5),(12,21,'2014-02-19 05:00:38','2014-05-19 04:00:38',1,'Monthly',3);
+/*!40000 ALTER TABLE `competition` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -58,7 +89,7 @@ CREATE TABLE `party` (
   `isprivate` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`partyid`),
   UNIQUE KEY `partyName_UNIQUE` (`partyName`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +98,7 @@ CREATE TABLE `party` (
 
 LOCK TABLES `party` WRITE;
 /*!40000 ALTER TABLE `party` DISABLE KEYS */;
-INSERT INTO `party` VALUES (11,'Chimps','tanner','2',0),(13,'ukl','tanner','',1),(17,'yuka','tanner','',1),(20,'teama','tempa','',0);
+INSERT INTO `party` VALUES (11,'Chimps','tanner','2',0),(13,'ukl','tanner','',1),(21,'teamb','b','',0),(25,'teamz','z','',0);
 /*!40000 ALTER TABLE `party` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,13 +125,34 @@ CREATE TABLE `player_party` (
 
 LOCK TABLES `player_party` WRITE;
 /*!40000 ALTER TABLE `player_party` DISABLE KEYS */;
-INSERT INTO `player_party` VALUES (1,11),(1,17),(7,20);
+INSERT INTO `player_party` VALUES (1,11),(1,21),(6,21),(11,25);
 /*!40000 ALTER TABLE `player_party` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'senior'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `create_competition` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_competition`( ipartyname VARCHAR(45), istartdate DATETIME, ienddate DATETIME, ifreq VARCHAR(45), icycles INT(11), iiselimination TINYINT(1))
+begin
+select @partyID := partyid from party where party.partyname = ipartyname;
+insert into competition (partyid, startdate, enddate,iselimination, frequency, cycles) values (@partyID, istartdate, ienddate, iiselimination, ifreq, icycles);
+SET @partyID = null;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `join_party` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -196,4 +248,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-01 11:34:01
+-- Dump completed on 2014-02-18 21:10:50
