@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "414473781.573574"
+            timestampString = "414662294.172975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "-createCompStarting:withFreq:andCycles:andElim:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "414475673.131161"
+            timestampString = "414662294.172975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "-createCompStarting:withFreq:andCycles:andElim:"
             landmarkType = "5">
          </BreakpointContent>

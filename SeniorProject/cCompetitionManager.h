@@ -13,5 +13,5 @@
 @property (nonatomic,weak)id delegate;
 
 - (void)createCompStarting:(NSDate *)startDate withFreq:(NSString *)freq andCycles:(NSNumber *)cycles andElim:(NSString *)elim;
-
+- (void)submitWeightWithPhoto:(UIImage *)weightPhoto;
 @end

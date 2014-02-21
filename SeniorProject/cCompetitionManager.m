@@ -9,8 +9,40 @@
 #import "cCompetitionManager.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "cUserSingleton.h"
+#import "SubmitWeightViewController.h"
 
 @implementation cCompetitionManager
+
+- (void)submitWeightWithPhoto:(UIImage *)weightPhoto
+{
+    cUserSingleton *user = [cUserSingleton getInstance];
+    CFGregorianDate currentDate = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), CFTimeZoneCopySystem());
+    NSString *timeString = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02.0f", currentDate.year, currentDate.month, currentDate.day, currentDate.hour, currentDate.minute, currentDate.second];
+    
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/submitWeight.php", baseURL];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *params = @{@"teamname": user.activeParty.name,
+                             @"username": user.username,
+                             @"datesubmitted": timeString};
+    NSData *imageData = UIImageJPEGRepresentation(weightPhoto, 0.5); // image size ca. 50 KB
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+    }
+    success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        [self.delegate submitWeightSuccess:@"Succuess"];
+        NSLog(@"SubmitWeight: Success %@", responseObject);
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        [self.delegate submitWeightFailed:@"Failed"];
+        NSLog(@"SubmitWeight: Failure %@, %@", error, operation.responseString);
+    }];
+    
+    
+}
 
 
 - (void)createCompStarting:(NSDate *)startDate withFreq:(NSString *)freq andCycles:(NSNumber *)cycles andElim:(NSString *)elim;

@@ -7,12 +7,34 @@
 //
 
 #import "SubmitWeightViewController.h"
+#import "cCompetitionManager.h"
+#import "cUserSingleton.h"
 
 @interface SubmitWeightViewController ()
 
 @end
 
 @implementation SubmitWeightViewController
+
+- (IBAction)submitWeight:(id)sender
+{
+    if (self.previewImageView.image)
+    {
+        cCompetitionManager *mgr = [[cCompetitionManager alloc]init];
+        mgr.delegate = self;
+        [mgr submitWeightWithPhoto:self.previewImageView.image];
+    }
+}
+
+- (void)submitWeightSuccess:(NSString *)msg
+{
+    
+}
+
+- (void)submitWeightFailed:(NSString *)msg
+{
+
+}
 
 - (IBAction)pickPhotoFromAlbum:(id)sender
 {

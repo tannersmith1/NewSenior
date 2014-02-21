@@ -130,6 +130,34 @@ INSERT INTO `player_party` VALUES (1,11),(1,21),(6,21),(11,25);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `scoresheet`
+--
+
+DROP TABLE IF EXISTS `scoresheet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `scoresheet` (
+  `scoresheetid` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `competitionid` mediumint(9) NOT NULL,
+  `playerid` mediumint(9) NOT NULL,
+  `datesubmitted` datetime NOT NULL,
+  `isverified` tinyint(1) NOT NULL,
+  `scoreType` varchar(45) NOT NULL,
+  `score` float DEFAULT NULL,
+  PRIMARY KEY (`scoresheetid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `scoresheet`
+--
+
+LOCK TABLES `scoresheet` WRITE;
+/*!40000 ALTER TABLE `scoresheet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `scoresheet` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping routines for database 'senior'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `create_competition` */;
@@ -238,6 +266,31 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `submit_weight` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `submit_weight`( ipartyname VARCHAR(45), iusername VARCHAR(45), idatesubmitted DATETIME)
+begin
+select @partyID := partyid from party where party.partyname = ipartyname;
+select @competitionID := competitionid from competition where competition.partyid = @partyID;
+select @playerID := playerid from player where player.username = iusername;
+insert into scoresheet (competitionid, playerid, datesubmitted, isverified, scoretype) values (@competitionID, @playerID, idatesubmitted, 0, 'Weight');
+SET @partyID = null;
+SET @playerID = null;
+SET @competitionID = null;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -248,4 +301,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-18 21:10:50
+-- Dump completed on 2014-02-21  0:00:09

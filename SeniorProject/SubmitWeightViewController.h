@@ -12,4 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *weightTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
 
+- (void)submitWeightSuccess:(NSString *)msg;
+- (void)submitWeightFailed:(NSString *)msg;
+
 @end
