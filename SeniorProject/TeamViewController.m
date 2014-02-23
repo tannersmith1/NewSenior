@@ -57,7 +57,7 @@
     //Post to web server, if credentials exist, move to main menu page
     cPartyManager *mgr = [[cPartyManager alloc] init];
     mgr.delegate = self;
-    [mgr getMembersFromParty:selectedParty];
+    [mgr getPartyData:selectedParty];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

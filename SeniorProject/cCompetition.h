@@ -16,4 +16,6 @@
 @property (nonatomic, strong)NSNumber *cycles;
 @property (nonatomic, strong)NSString *elimination;
 
+- (void)clearData;
+
 @end

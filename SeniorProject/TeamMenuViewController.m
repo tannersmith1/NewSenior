@@ -76,6 +76,19 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound)
+    {
+        // 'Back' button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        cUserSingleton *user = [cUserSingleton getInstance];
+        [user.activeParty.activeCompetition clearData];
+    }
+    
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

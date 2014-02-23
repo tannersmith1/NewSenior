@@ -43,6 +43,9 @@
 		5191E9F318B4560400201F2E /* cCompetition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191E9F218B4560400201F2E /* cCompetition.m */; };
 		5191E9F918B46DF000201F2E /* SubmitWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5191E9F818B46DF000201F2E /* SubmitWeightViewController.m */; };
 		5191E9FB18B53D9200201F2E /* submitWeight.php in Resources */ = {isa = PBXBuildFile; fileRef = 5191E9FA18B53D9200201F2E /* submitWeight.php */; };
+		5191E9FF18B93D2200201F2E /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5191E9FE18B93D2200201F2E /* images.jpg */; };
+		5191EA0118B9760A00201F2E /* login.php in Resources */ = {isa = PBXBuildFile; fileRef = 5191EA0018B9760A00201F2E /* login.php */; };
+		5191EA0318B9A5FD00201F2E /* getParty.php in Resources */ = {isa = PBXBuildFile; fileRef = 5191EA0218B9A5FD00201F2E /* getParty.php */; };
 		519E3C001891F329005375DA /* TeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3BFF1891F328005375DA /* TeamViewController.m */; };
 		519E3C031891FD43005375DA /* cPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C021891FD43005375DA /* cPlayerManager.m */; };
 		519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C071893688F005375DA /* JoinTeamViewController.m */; };
@@ -122,6 +125,9 @@
 		5191E9F718B46DF000201F2E /* SubmitWeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitWeightViewController.h; sourceTree = "<group>"; };
 		5191E9F818B46DF000201F2E /* SubmitWeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitWeightViewController.m; sourceTree = "<group>"; };
 		5191E9FA18B53D9200201F2E /* submitWeight.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = submitWeight.php; path = ../../../../../../Applications/MAMP/htdocs/submitWeight.php; sourceTree = "<group>"; };
+		5191E9FE18B93D2200201F2E /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
+		5191EA0018B9760A00201F2E /* login.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = login.php; path = ../../../../../../Applications/MAMP/htdocs/login.php; sourceTree = "<group>"; };
+		5191EA0218B9A5FD00201F2E /* getParty.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = getParty.php; path = ../../../../../../Applications/MAMP/htdocs/getParty.php; sourceTree = "<group>"; };
 		519E3BFE1891F328005375DA /* TeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamViewController.h; sourceTree = "<group>"; };
 		519E3BFF1891F328005375DA /* TeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamViewController.m; sourceTree = "<group>"; };
 		519E3C011891FD43005375DA /* cPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cPlayerManager.h; sourceTree = "<group>"; };
@@ -187,6 +193,8 @@
 		513F88A31886754A00374B02 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				5191EA0218B9A5FD00201F2E /* getParty.php */,
+				5191EA0018B9760A00201F2E /* login.php */,
 				5191E9FA18B53D9200201F2E /* submitWeight.php */,
 				5191E9EF18B4501600201F2E /* createCompetition.php */,
 			);
@@ -242,6 +250,7 @@
 		518C5BB4188368C100D8FF8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5191E9FD18B93D2200201F2E /* images */,
 				518C5BB5188368C100D8FF8F /* SeniorProject-Info.plist */,
 				518C5BB6188368C100D8FF8F /* InfoPlist.strings */,
 				518C5BB9188368C100D8FF8F /* main.m */,
@@ -323,6 +332,14 @@
 			name = BOL;
 			sourceTree = "<group>";
 		};
+		5191E9FD18B93D2200201F2E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				5191E9FE18B93D2200201F2E /* images.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -402,11 +419,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5191EA0118B9760A00201F2E /* login.php in Resources */,
 				518C5BC6188368C100D8FF8F /* Images.xcassets in Resources */,
 				5191E9F018B4501600201F2E /* createCompetition.php in Resources */,
 				5191E9A718A01E7200201F2E /* Localizable.strings in Resources */,
 				518C5BB8188368C100D8FF8F /* InfoPlist.strings in Resources */,
+				5191E9FF18B93D2200201F2E /* images.jpg in Resources */,
 				5191E9FB18B53D9200201F2E /* submitWeight.php in Resources */,
+				5191EA0318B9A5FD00201F2E /* getParty.php in Resources */,
 				518C5BC1188368C100D8FF8F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

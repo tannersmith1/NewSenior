@@ -32,8 +32,9 @@
     }
     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         [self.delegate submitWeightSuccess:@"Succuess"];
-        NSLog(@"SubmitWeight: Success %@", responseObject);
+        NSLog(@"cCompetitionManager: %@", text);
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
@@ -67,10 +68,13 @@
          
          if ([text isEqualToString:@"TRUE"])
          {
-             NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             NSArray *parties = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-             //TODO: SAVE DATA INTO USERSINGLETON
-             NSLog(text);
+             cUserSingleton *user = [cUserSingleton getInstance];
+             user.activeParty.activeCompetition.startDate = startDate;
+             user.activeParty.activeCompetition.endDate = endDate;
+             user.activeParty.activeCompetition.frequency = freq;
+             user.activeParty.activeCompetition.cycles = cycles;
+             user.activeParty.activeCompetition.elimination = elim;
+             
              [self.delegate setupCompetitionSuccess:@"Competition created Succesfully"];
          }
          else

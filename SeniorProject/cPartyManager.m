@@ -52,10 +52,10 @@
      }];
 }
 
-- (void)getMembersFromParty:(NSString *)partyName
+- (void)getPartyData:(NSString *)partyName
 {
     NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-    NSString *url = [NSString stringWithFormat:@"%@/getMembers.php", baseURL];
+    NSString *url = [NSString stringWithFormat:@"%@/getParty.php", baseURL];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -72,6 +72,7 @@
          else
          {
              cUserSingleton *user = [cUserSingleton getInstance];
+             NSLog(text);
              [user.activeParty setData:responseObject];
              
              //Tell the view controller that everything succeeded

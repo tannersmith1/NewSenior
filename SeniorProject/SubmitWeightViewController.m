@@ -79,7 +79,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                               message:@"Device has no camera"
@@ -88,8 +89,11 @@
                                                     otherButtonTitles: nil];
         
         [myAlertView show];
+        UIImage * myImage = [UIImage imageNamed: @"images.jpg"];
+        self.previewImageView.image = myImage;
         
     }
+
 }
 
 - (void)didReceiveMemoryWarning

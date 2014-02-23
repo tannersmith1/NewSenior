@@ -18,7 +18,7 @@
 //Uses data from singleton to post
 - (void)deleteActiveParty;
 //Saves the selected party information into the user singleton
-- (void)getMembersFromParty:(NSString *)partyName;
+- (void)getPartyData:(NSString *)partyName;
 - (void)deleteMember:(NSString *)memberName FromTeam:(NSString *)teamName;
 
 

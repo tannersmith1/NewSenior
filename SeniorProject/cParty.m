@@ -17,6 +17,10 @@
     self.members = [NSMutableArray arrayWithArray:[json objectForKey:@"members"]];
     self.name = [NSString stringWithString:[json objectForKey:@"name"]];
     self.leader = [NSString stringWithString:[json objectForKey:@"leader"]];
+    
+   
 }
+
+
 
 @end
