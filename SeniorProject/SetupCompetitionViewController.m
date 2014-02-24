@@ -71,13 +71,22 @@
     NSString *freq = [self.frequencyControl titleForSegmentAtIndex:self.frequencyControl.selectedSegmentIndex];
     NSString *elimination = [self.eliminationControl titleForSegmentAtIndex:self.eliminationControl.selectedSegmentIndex];
     NSNumber *cycles = [NSNumber numberWithInt:[self.cycleNumField.text integerValue]];
-    NSString *date = [self.startDatePicker.date description];
+
+    NSDateFormatter *dateform = [[NSDateFormatter alloc] init];
+    [dateform setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString *dateString = [NSDateFormatter localizedStringFromDate:self.startDatePicker.date
+                                                          dateStyle:NSDateFormatterShortStyle
+                                                          timeStyle:NSDateFormatterFullStyle];
+    NSLog(@"%@ %@",dateString, self.startDatePicker.date);
     
     cCompetitionManager *mgr = [[cCompetitionManager alloc] init];
     mgr.delegate = self;
     [mgr createCompStarting:self.startDatePicker.date withFreq:freq andCycles:cycles andElim:elimination];
     
-    NSString *debug = [NSString stringWithFormat:@"%@  %@  %@  %@", freq, elimination, cycles, date];
+    
+    
+    NSString *debug = [NSString stringWithFormat:@"%@  %@  %@  %@", freq, elimination, cycles, dateString];
     NSLog(debug);
 }
 

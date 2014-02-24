@@ -16,14 +16,18 @@
 - (void)submitWeightWithPhoto:(UIImage *)weightPhoto
 {
     cUserSingleton *user = [cUserSingleton getInstance];
-    CFGregorianDate currentDate = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), CFTimeZoneCopySystem());
-    NSString *timeString = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02.0f", currentDate.year, currentDate.month, currentDate.day, currentDate.hour, currentDate.minute, currentDate.second];
+    //CFGregorianDate currentDate = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), NULL);
+    //NSString *timeString = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02.0f", currentDate.year, currentDate.month, currentDate.day, currentDate.hour, currentDate.minute, currentDate.second];
     
+    NSDate *submissionDate = [NSDate date];
+
     //Calculate the start date and end date for the cycle this submission belongs to, this is used to check if a submission already exists
     NSDateFormatter *dateform = [[NSDateFormatter alloc] init];
     [dateform setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *submissionDate = [[NSDate alloc]init];
-    submissionDate = [dateform dateFromString:timeString];
+
+    //NSDate *submissionDate = [[NSDate alloc]init];
+    //submissionDate = [dateform dateFromString:timeString];
+    NSString *timeString = [dateform stringFromDate:submissionDate];
     
     //Extract date components from competition start date
     NSCalendar *gregorian = [[NSCalendar alloc]
@@ -49,7 +53,7 @@
         cycleStart = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0 ];
         [offsetComponents setWeek:weeks +1];
         cycleEnd = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0];
-        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", user.activeParty.activeCompetition.startDate, user.activeParty.activeCompetition.frequency, (int)weeks, cycleStart, cycleEnd );
+        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", [dateform stringFromDate:user.activeParty.activeCompetition.startDate], user.activeParty.activeCompetition.frequency, (int)weeks, [dateform stringFromDate:cycleStart], [dateform stringFromDate:cycleEnd] );
     }
     else if ([user.activeParty.activeCompetition.frequency isEqualToString:@"Monthly"])
     {
@@ -57,7 +61,7 @@
         cycleStart = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0 ];
         [offsetComponents setMonth:months +1];
         cycleEnd = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0];
-        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", user.activeParty.activeCompetition.startDate, user.activeParty.activeCompetition.frequency, (int)months, cycleStart, cycleEnd );
+        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", [dateform stringFromDate:user.activeParty.activeCompetition.startDate], user.activeParty.activeCompetition.frequency, (int)months, [dateform stringFromDate:cycleStart], [dateform stringFromDate:cycleEnd] );
     }
     else if ([user.activeParty.activeCompetition.frequency isEqualToString:@"Daily"])
     {
@@ -65,12 +69,12 @@
         cycleStart = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0 ];
         [offsetComponents setDay:days +1];
         cycleEnd = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0];
-        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", user.activeParty.activeCompetition.startDate, user.activeParty.activeCompetition.frequency, (int)days, cycleStart, cycleEnd );
+        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", [dateform stringFromDate:user.activeParty.activeCompetition.startDate], user.activeParty.activeCompetition.frequency, (int)days, [dateform stringFromDate:cycleStart], [dateform stringFromDate:cycleEnd] );
     }
     
     NSString *cycleStartString = [dateform stringFromDate:cycleStart];
     NSString *cycleEndString = [dateform stringFromDate:cycleEnd];
-    
+    NSString *startDateString = [dateform stringFromDate:user.activeParty.activeCompetition.startDate];
     
     //Make post to web server
     NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
@@ -112,14 +116,17 @@
 {
     cUserSingleton *user = [cUserSingleton getInstance];
     NSDate *endDate = [self determineEndDateFrom:startDate withFreq:freq andCycles:cycles];
+    NSDateFormatter *dateform = [[NSDateFormatter alloc] init];
+    [dateform setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
     
     NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
     NSString *url = [NSString stringWithFormat:@"%@/createCompetition.php", baseURL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSDictionary *params = @{@"teamname": user.activeParty.name,
-                             @"startdate": startDate,
-                             @"enddate": endDate,
+                             @"startdate": [dateform stringFromDate:startDate],
+                             @"enddate": [dateform stringFromDate:endDate],
                              @"frequency": freq,
                              @"cycles": cycles,
                              @"iselimination": elim};
