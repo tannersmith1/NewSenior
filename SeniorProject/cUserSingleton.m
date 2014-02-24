@@ -21,6 +21,7 @@ static cUserSingleton *sharedObject = nil;
         {
             sharedObject = [[cUserSingleton alloc] init];
             sharedObject.activeParty = [[cParty alloc] init];
+            sharedObject.activeParty.activeCompetition = [[cCompetition alloc]init];
         }
     }
     

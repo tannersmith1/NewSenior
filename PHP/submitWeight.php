@@ -61,9 +61,6 @@ function sendResponse($status = 200, $body = '', $content_type = 'text/html')
     header('Content-type: ' . $content_type);
     echo $body;
 }
-    
-$link = mysqli_connect("localhost","root","root");
-mysqli_select_db($link, "senior");
 
 class SubmitWeightAPI
 {
@@ -92,72 +89,80 @@ class SubmitWeightAPI
 	//submits the scoresheet if the user doesn't already have one submitted for the cycle
 	function SubmitWeight()
 	{
-        if (isset($_POST["username"]) && isset($_POST["teamname"]) && isset($_POST["datesubmitted"]))
+        if (isset($_POST["username"]) && isset($_POST["teamname"]) && isset($_POST["datesubmitted"]) && isset($_POST["cyclestart"]) && isset($_POST["cycleend"]))
         {
-                //sanitize inputs
-                $username = mysql_real_escape_string( $_POST["username"] );
-                $teamname = mysql_real_escape_string( $_POST["teamname"] );
-                $photoData = $_FILES['file'];
-                $datesubmitted = $_POST["datesubmitted"]);
             
-                //TODO: Check if the user already has a scoresheet submitted for the cycle
-                upload($photoData, $username, $teamname, datesubmitted);
             
-                /*check if team already exists
-                $result = mysql_query("select party.partyid from party where partyname = '$teamname'");
+            //sanitize inputs
+            $username = mysql_real_escape_string( $_POST["username"] );
+            $teamname = mysql_real_escape_string( $_POST["teamname"] );
+            $photoData = $_FILES['file'];
+            $datesubmitted = $_POST["datesubmitted"];
+            $cycleStart = $_POST["cyclestart"];
+            $cycleEnd = $_POST["cycleend"];
+
+            //TODO: Check if the user already has a scoresheet submitted for the cycle
+            $result = mysql_query("CALL check_for_existing_scorsheets('$teamname', '$username', '$cycleStart', '$cycleEnd');");
 			
-                //Since no teams were returned, add valid entry into database
-                if( mysql_num_rows( $result ) == 0)
+            //Since no scoresheets were returned, add valid entry into database
+            if( mysql_num_rows( $result ) == 0)
+            {
+            
+                //check if there was no error during the file upload
+                if ($photoData['error']==0)
                 {
-                    //insert user into database
-                    $result = mysql_query("CALL new_party('$teamname', '$username', '$password', '$isPrivate');");
-                    echo "TRUE";
-                }
-                else
+                    $result = mysql_query("CALL submit_weight('$teamname', '$username', '$datesubmitted');");
+                    if (!$result['error'])
+                    {
+                        
+                        //inserted in the database, go on with file storage
+                        //database link
+                        $link = mysqli_connect("localhost","root","root");
+                        mysqli_select_db($link, "senior");
+                        
+                        //get the last automatically generated ID
+                        $IdPhoto = mysqli_insert_id($link);
+                        
+                        //move the temporarily stored file to a convenient location
+                        if (move_uploaded_file($photoData['tmp_name'], "upload/".$IdPhoto.".jpg"))
+                        {
+                            //file moved, all good, generate thumbnail
+                            //thumb("upload/".$IdPhoto.".jpg", 180);
+                            //echo json_encode(array('successful'=>1));
+                            echo "TRUE";
+                        }
+                        else
+                        {
+                            //errorJson('Upload on server problem');
+                            echo "Upload on server proble";
+                        };
+                        
+                    }
+                    else
+                    {
+                        //errorJson('Upload database problem.'.$result['error']);
+                        echo "Upload database problem";
+                    }
+                    
+                } 
+                else 
                 {
-                    echo "FALSE";
+                    echo "upload malfuntion";
                 }
-                 */
+            
             }
             else
             {
-                echo "need username, password";
+                echo mysql_num_rows($result);
             }
-    }
-    
-    function upload($photoData, $username, $teamname, $datesubmitted)
-    {
-        //check if a user ID is passed
-        
-        //check if there was no error during the file upload
-        if ($photoData['error']==0) {
             
-            $result = mysql_query("CALL submit_weight('$teamname', '$username', '$datesubmitted');");
-            if (!$result['error']) {
-                
-                //inserted in the database, go on with file storage
-                //database link
-                global $link;
-                
-                //get the last automatically generated ID
-                $IdPhoto = mysqli_insert_id($link);
-                
-                //move the temporarily stored file to a convenient location
-                if (move_uploaded_file($photoData['tmp_name'], "upload/".$IdPhoto.".jpg")) {
-                    //file moved, all good, generate thumbnail
-                    thumb("upload/".$IdPhoto.".jpg", 180);
-                    print json_encode(array('successful'=>1));
-                } else {
-                    errorJson('Upload on server problem');
-                };
-                
-            } else {
-                errorJson('Upload database problem.'.$result['error']);
-            }
-        } else {
-            errorJson('Upload malfunction');
+        }
+        else
+        {
+            echo "need username, password1";
         }
     }
+
 }
 
 $api = new SubmitWeightAPI;

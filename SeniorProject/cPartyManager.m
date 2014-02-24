@@ -72,7 +72,6 @@
          else
          {
              cUserSingleton *user = [cUserSingleton getInstance];
-             NSLog(text);
              [user.activeParty setData:responseObject];
              
              //Tell the view controller that everything succeeded

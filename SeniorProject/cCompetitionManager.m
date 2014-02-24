@@ -19,13 +19,69 @@
     CFGregorianDate currentDate = CFAbsoluteTimeGetGregorianDate(CFAbsoluteTimeGetCurrent(), CFTimeZoneCopySystem());
     NSString *timeString = [NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02.0f", currentDate.year, currentDate.month, currentDate.day, currentDate.hour, currentDate.minute, currentDate.second];
     
+    //Calculate the start date and end date for the cycle this submission belongs to, this is used to check if a submission already exists
+    NSDateFormatter *dateform = [[NSDateFormatter alloc] init];
+    [dateform setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *submissionDate = [[NSDate alloc]init];
+    submissionDate = [dateform dateFromString:timeString];
+    
+    //Extract date components from competition start date
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSUInteger unitFlags = NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit;
+    
+    NSDateComponents *components = [gregorian components:unitFlags
+                                                fromDate:user.activeParty.activeCompetition.startDate
+                                                  toDate:submissionDate options:0];
+    //Seperate Values
+    NSInteger months = [components month];
+    NSInteger weeks = [components week];
+    NSInteger days = [components day];
+    
+    //Calculate the dates for when the current cycle starts and ends
+    NSDate *cycleStart;
+    NSDate *cycleEnd;
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    if ([user.activeParty.activeCompetition.frequency isEqualToString:@"Weekly"])
+    {
+        [offsetComponents setWeek:weeks];
+        cycleStart = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0 ];
+        [offsetComponents setWeek:weeks +1];
+        cycleEnd = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0];
+        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", user.activeParty.activeCompetition.startDate, user.activeParty.activeCompetition.frequency, (int)weeks, cycleStart, cycleEnd );
+    }
+    else if ([user.activeParty.activeCompetition.frequency isEqualToString:@"Monthly"])
+    {
+        [offsetComponents setMonth:months];
+        cycleStart = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0 ];
+        [offsetComponents setMonth:months +1];
+        cycleEnd = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0];
+        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", user.activeParty.activeCompetition.startDate, user.activeParty.activeCompetition.frequency, (int)months, cycleStart, cycleEnd );
+    }
+    else if ([user.activeParty.activeCompetition.frequency isEqualToString:@"Daily"])
+    {
+        [offsetComponents setDay:days];
+        cycleStart = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0 ];
+        [offsetComponents setDay:days +1];
+        cycleEnd = [gregorian dateByAddingComponents:offsetComponents toDate:user.activeParty.activeCompetition.startDate options:0];
+        NSLog(@"\nStart Date: %@\nFrequency: %@\nCycle: %d\nCycle Start: %@\nCycle End: %@\n", user.activeParty.activeCompetition.startDate, user.activeParty.activeCompetition.frequency, (int)days, cycleStart, cycleEnd );
+    }
+    
+    NSString *cycleStartString = [dateform stringFromDate:cycleStart];
+    NSString *cycleEndString = [dateform stringFromDate:cycleEnd];
+    
+    
+    //Make post to web server
     NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
     NSString *url = [NSString stringWithFormat:@"%@/submitWeight.php", baseURL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSDictionary *params = @{@"teamname": user.activeParty.name,
                              @"username": user.username,
-                             @"datesubmitted": timeString};
+                             @"datesubmitted": timeString,
+                             @"cyclestart": cycleStartString,
+                             @"cycleend": cycleEndString};
     NSData *imageData = UIImageJPEGRepresentation(weightPhoto, 0.5); // image size ca. 50 KB
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
@@ -33,16 +89,22 @@
     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        [self.delegate submitWeightSuccess:@"Succuess"];
-        NSLog(@"cCompetitionManager: %@", text);
+        if ([text isEqualToString:@"TRUE"])
+        {
+            [self.delegate submitWeightSuccess:@"Succuess"];
+            NSLog(@"cCompetitionManager: %@", text);
+        }
+        else
+        {
+            [self.delegate submitWeightFailed:text];
+        }
+        
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         [self.delegate submitWeightFailed:@"Failed"];
         NSLog(@"SubmitWeight: Failure %@, %@", error, operation.responseString);
     }];
-    
-    
 }
 
 

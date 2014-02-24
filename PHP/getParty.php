@@ -111,9 +111,7 @@ class GetPartyAPI
 			}
 			else
 			{				
-				
-                
-                echo "\nMade it past first query";
+
                 //Party Members
                 $result = mysqli_query($db,"call party_members('$teamname');");
                 $partyMembers = array();
@@ -135,11 +133,7 @@ class GetPartyAPI
                 if(1)
                 {
                     $result2 = mysqli_query($db2,"call get_competition('$teamname');");
-                    if (mysqli_num_rows($result2) == 0)
-                    {
-                        echo "Get Competition: No rows found";
-                        exit;
-                    }
+                    
                     
                     while ($row = mysqli_fetch_assoc($result2))
                     {
@@ -157,9 +151,10 @@ class GetPartyAPI
                     
                     $competition = array('startdate' => $startdate, 'enddate' => $enddate, 'frequency' => $frequency, 'cycles' => $cycles, 'iselimination' => $iselimination);
                     
-                    $partyData = array('name' => $teamname, 'leader' => $partyLeader, 'members' => $partyMembers, 'competition' => $competition);
-                    mysqli_free_result($result);
+                    $partyData = array('competition' => $competition, 'name' => $teamname, 'leader' => $partyLeader, 'members' => $partyMembers);
+                    
                     echo json_encode($partyData);
+                    
                 }
                 
                 

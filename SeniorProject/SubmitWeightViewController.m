@@ -18,22 +18,36 @@
 
 - (IBAction)submitWeight:(id)sender
 {
+    
     if (self.previewImageView.image)
     {
         cCompetitionManager *mgr = [[cCompetitionManager alloc]init];
         mgr.delegate = self;
         [mgr submitWeightWithPhoto:self.previewImageView.image];
     }
+    
 }
 
 - (void)submitWeightSuccess:(NSString *)msg
 {
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                          message:@"Score Submitted"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
     
+    [myAlertView show];
 }
 
 - (void)submitWeightFailed:(NSString *)msg
 {
-
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
 }
 
 - (IBAction)pickPhotoFromAlbum:(id)sender

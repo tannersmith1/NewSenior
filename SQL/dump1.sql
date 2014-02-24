@@ -61,7 +61,7 @@ CREATE TABLE `competition` (
   PRIMARY KEY (`competitionid`),
   KEY `partyid` (`partyid`),
   CONSTRAINT `competition_ibfk_1` FOREIGN KEY (`partyid`) REFERENCES `party` (`partyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `competition` (
 
 LOCK TABLES `competition` WRITE;
 /*!40000 ALTER TABLE `competition` DISABLE KEYS */;
-INSERT INTO `competition` VALUES (9,13,'2020-02-18 00:00:00','2014-03-18 00:00:00',1,'Monthly',1),(10,11,'2014-02-21 04:00:23','2014-03-28 03:00:23',1,'Weekly',5),(11,25,'2014-02-19 04:00:33','2014-03-26 03:00:33',1,'Weekly',5),(12,21,'2014-02-19 05:00:38','2014-05-19 04:00:38',1,'Monthly',3);
+INSERT INTO `competition` VALUES (9,13,'2020-02-18 00:00:00','2014-03-18 00:00:00',1,'Monthly',1),(10,11,'2014-02-10 00:00:00','2014-03-28 03:00:23',1,'Weekly',5),(11,25,'2014-02-19 04:00:33','2014-03-26 03:00:33',1,'Weekly',5),(12,21,'2014-02-19 05:00:38','2014-05-19 04:00:38',1,'Monthly',3),(13,26,'2014-02-23 22:26:29','2014-04-23 21:26:29',0,'Monthly',2),(14,27,'2014-02-24 05:30:19','2014-09-22 04:30:19',0,'Weekly',30);
 /*!40000 ALTER TABLE `competition` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `party` (
   `isprivate` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`partyid`),
   UNIQUE KEY `partyName_UNIQUE` (`partyName`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `party` (
 
 LOCK TABLES `party` WRITE;
 /*!40000 ALTER TABLE `party` DISABLE KEYS */;
-INSERT INTO `party` VALUES (11,'Chimps','tanner','2',0),(13,'ukl','tanner','',1),(21,'teamb','b','',0),(25,'teamz','z','',0);
+INSERT INTO `party` VALUES (11,'Chimps','tanner','2',0),(13,'ukl','tanner','',1),(21,'teamb','b','',0),(25,'teamz','z','',0),(26,'teamz2','z','',0),(27,'testweight','tanner','',0);
 /*!40000 ALTER TABLE `party` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `player_party` (
 
 LOCK TABLES `player_party` WRITE;
 /*!40000 ALTER TABLE `player_party` DISABLE KEYS */;
-INSERT INTO `player_party` VALUES (1,11),(1,21),(6,21),(11,25);
+INSERT INTO `player_party` VALUES (1,11),(1,21),(6,21),(11,25),(11,26),(1,27);
 /*!40000 ALTER TABLE `player_party` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `scoresheet` (
   `scoreType` varchar(45) NOT NULL,
   `score` float DEFAULT NULL,
   PRIMARY KEY (`scoresheetid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,12 +154,38 @@ CREATE TABLE `scoresheet` (
 
 LOCK TABLES `scoresheet` WRITE;
 /*!40000 ALTER TABLE `scoresheet` DISABLE KEYS */;
+INSERT INTO `scoresheet` VALUES (1,11,11,'2014-02-22 12:56:02',0,'Weight',NULL),(2,11,11,'2014-02-22 13:00:57',0,'Weight',NULL),(3,12,1,'2014-02-23 21:27:13',0,'Weight',NULL),(4,12,1,'2014-02-23 21:27:58',0,'Weight',NULL);
 /*!40000 ALTER TABLE `scoresheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'senior'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `check_for_existing_scorsheets` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `check_for_existing_scorsheets`( ipartyname VARCHAR(45), iusername VARCHAR(45), icyclestart DATETIME, icycleend DATETIME )
+begin
+select @partyID := partyid from party where party.partyname = ipartyname;
+select @competitionID := competitionid from competition where competition.partyid = @partyID;
+select @playerID := playerid from player where player.username = iusername;
+select * from scoresheet where competitionid = @competitionid AND playerid = @playerid and ( datesubmitted BETWEEN icyclestart and icycleend );
+SET @partyID = null;
+SET @playerID = null;
+SET @competitionID = null;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `create_competition` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -175,6 +201,27 @@ begin
 select @partyID := partyid from party where party.partyname = ipartyname;
 insert into competition (partyid, startdate, enddate,iselimination, frequency, cycles) values (@partyID, istartdate, ienddate, iiselimination, ifreq, icycles);
 SET @partyID = null;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_competition` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_competition`( ipartyname VARCHAR(45) )
+begin
+select startdate, enddate, frequency, cycles, iselimination 
+from competition 
+where partyid = (select partyid from party where partyName = ipartyname);
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -301,4 +348,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-21  0:00:09
+-- Dump completed on 2014-02-23 22:01:19
