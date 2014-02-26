@@ -10,6 +10,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "cUserSingleton.h"
 #import "SubmitWeightViewController.h"
+#import "UnverifiedScoreMenuViewController.h"
 
 @implementation cCompetitionManager
 
@@ -87,6 +88,7 @@
                              @"cyclestart": cycleStartString,
                              @"cycleend": cycleEndString};
     NSData *imageData = UIImageJPEGRepresentation(weightPhoto, 0.5); // image size ca. 50 KB
+
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
     }
@@ -111,6 +113,39 @@
     }];
 }
 
+
+- (void)getScoreSheet:(NSString *)isVerified
+{
+    cUserSingleton *user = [cUserSingleton getInstance];
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/getScoreSheets.php", baseURL];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *params = @{@"teamname": user.activeParty.name,
+                             @"isverified": isVerified};
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+         
+         
+         if ([text isEqualToString:@"FALSE"])
+         {
+             
+             [self.delegate getScoreSheetFailed:@"Competition created Succesfully"];
+         }
+         else
+         {
+             [self.delegate getScoreSheetSuccess:responseObject];
+             
+         }
+         
+         
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self.delegate getScoreSheetFailed:[error localizedDescription]];
+     }];
+}
 
 - (void)createCompStarting:(NSDate *)startDate withFreq:(NSString *)freq andCycles:(NSNumber *)cycles andElim:(NSString *)elim;
 {

@@ -51,6 +51,10 @@
 		519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C071893688F005375DA /* JoinTeamViewController.m */; };
 		51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */; };
 		51E240DA1898FED60038A70E /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E240D91898FED60038A70E /* RosterViewController.m */; };
+		51F18BE918BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F18BE818BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m */; };
+		51F18BEC18BD22A800CD7353 /* cScoreSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F18BEB18BD22A800CD7353 /* cScoreSheet.m */; };
+		51F18BEE18BD299200CD7353 /* getScoreSheets.php in Resources */ = {isa = PBXBuildFile; fileRef = 51F18BED18BD299200CD7353 /* getScoreSheets.php */; };
+		51F18BF418BD5D1E00CD7353 /* VerifyScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F18BF318BD5D1E00CD7353 /* VerifyScoreViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +142,13 @@
 		51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMenuViewController.m; sourceTree = "<group>"; };
 		51E240D81898FED60038A70E /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		51E240D91898FED60038A70E /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		51F18BE718BD0B0000CD7353 /* UnverifiedScoreMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnverifiedScoreMenuViewController.h; sourceTree = "<group>"; };
+		51F18BE818BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnverifiedScoreMenuViewController.m; sourceTree = "<group>"; };
+		51F18BEA18BD22A800CD7353 /* cScoreSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cScoreSheet.h; sourceTree = "<group>"; };
+		51F18BEB18BD22A800CD7353 /* cScoreSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cScoreSheet.m; sourceTree = "<group>"; };
+		51F18BED18BD299200CD7353 /* getScoreSheets.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = getScoreSheets.php; path = ../../../../../../Applications/MAMP/htdocs/getScoreSheets.php; sourceTree = "<group>"; };
+		51F18BF218BD5D1E00CD7353 /* VerifyScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyScoreViewController.h; sourceTree = "<group>"; };
+		51F18BF318BD5D1E00CD7353 /* VerifyScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyScoreViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +204,7 @@
 		513F88A31886754A00374B02 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				51F18BED18BD299200CD7353 /* getScoreSheets.php */,
 				5191EA0218B9A5FD00201F2E /* getParty.php */,
 				5191EA0018B9760A00201F2E /* login.php */,
 				5191E9FA18B53D9200201F2E /* submitWeight.php */,
@@ -302,6 +314,10 @@
 				5191E9A918B3F62000201F2E /* SetupCompetitionViewController.m */,
 				5191E9F718B46DF000201F2E /* SubmitWeightViewController.h */,
 				5191E9F818B46DF000201F2E /* SubmitWeightViewController.m */,
+				51F18BE718BD0B0000CD7353 /* UnverifiedScoreMenuViewController.h */,
+				51F18BE818BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m */,
+				51F18BF218BD5D1E00CD7353 /* VerifyScoreViewController.h */,
+				51F18BF318BD5D1E00CD7353 /* VerifyScoreViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -315,6 +331,8 @@
 				518C5BEF188382CE00D8FF8F /* cUserSingleton.m */,
 				5191E9F118B4560400201F2E /* cCompetition.h */,
 				5191E9F218B4560400201F2E /* cCompetition.m */,
+				51F18BEA18BD22A800CD7353 /* cScoreSheet.h */,
+				51F18BEB18BD22A800CD7353 /* cScoreSheet.m */,
 			);
 			name = BO;
 			sourceTree = "<group>";
@@ -421,6 +439,7 @@
 			files = (
 				5191EA0118B9760A00201F2E /* login.php in Resources */,
 				518C5BC6188368C100D8FF8F /* Images.xcassets in Resources */,
+				51F18BEE18BD299200CD7353 /* getScoreSheets.php in Resources */,
 				5191E9F018B4501600201F2E /* createCompetition.php in Resources */,
 				5191E9A718A01E7200201F2E /* Localizable.strings in Resources */,
 				518C5BB8188368C100D8FF8F /* InfoPlist.strings in Resources */,
@@ -453,18 +472,21 @@
 				518C5BF0188382CE00D8FF8F /* cUserSingleton.m in Sources */,
 				513F889F1886624600374B02 /* AFURLConnectionOperation.m in Sources */,
 				513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */,
+				51F18BEC18BD22A800CD7353 /* cScoreSheet.m in Sources */,
 				513F889C1886624600374B02 /* AFHTTPSessionManager.m in Sources */,
 				513F88A01886624600374B02 /* AFURLRequestSerialization.m in Sources */,
 				51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */,
 				5191E9F318B4560400201F2E /* cCompetition.m in Sources */,
 				518C5BF3188382F600D8FF8F /* cPartyManager.m in Sources */,
 				5191E9EE18B42F9F00201F2E /* cCompetitionManager.m in Sources */,
+				51F18BF418BD5D1E00CD7353 /* VerifyScoreViewController.m in Sources */,
 				513F88A21886624600374B02 /* AFURLSessionManager.m in Sources */,
 				518C5BC4188368C100D8FF8F /* MainMenuViewController.m in Sources */,
 				5191E9AA18B3F62000201F2E /* SetupCompetitionViewController.m in Sources */,
 				519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */,
 				513F889B1886624600374B02 /* AFHTTPRequestOperationManager.m in Sources */,
 				51E240DA1898FED60038A70E /* RosterViewController.m in Sources */,
+				51F18BE918BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m in Sources */,
 				513F87AC1886443000374B02 /* RegisterViewController.m in Sources */,
 				519E3C001891F329005375DA /* TeamViewController.m in Sources */,
 				513F88A11886624600374B02 /* AFURLResponseSerialization.m in Sources */,

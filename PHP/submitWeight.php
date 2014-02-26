@@ -64,10 +64,9 @@ function sendResponse($status = 200, $body = '', $content_type = 'text/html')
 
 class SubmitWeightAPI
 {
-	private $db;
 	private $conn;
-    
-    
+    private $db;
+    private $_resultSet;
     
 	// Constructor - open DB connection
 	function __construct() 
@@ -86,12 +85,45 @@ class SubmitWeightAPI
 		$this->db->close();
 	}
     
+    protected function free(){
+        $this->_resultSet->free();
+        $this->_resultSet=null;
+    }
+    
+    protected function checkMoreResults(){
+        if($this->db->more_results())
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    protected function clearResults()
+    {
+        if($this->checkMoreResults())
+        {
+            if($this->db->next_result())
+            {
+                if($this->_resultSet=$this->db->store_result())
+                {
+                    $this->free();
+                }
+                $this->clearResults(); // <----------- recursive call is your friend
+            }
+        }
+    }
+    
 	//submits the scoresheet if the user doesn't already have one submitted for the cycle
 	function SubmitWeight()
 	{
         if (isset($_POST["username"]) && isset($_POST["teamname"]) && isset($_POST["datesubmitted"]) && isset($_POST["cyclestart"]) && isset($_POST["cycleend"]))
         {
-            
+            $db = new mysqli('localhost', 'root', 'root', 'senior');
+            if($db->connect_errno > 0)
+            {
+                die('Unable to connect to database [' . $db->connect_error . ']');
+            }
             
             //sanitize inputs
             $username = mysql_real_escape_string( $_POST["username"] );
@@ -102,47 +134,55 @@ class SubmitWeightAPI
             $cycleEnd = $_POST["cycleend"];
 
             //TODO: Check if the user already has a scoresheet submitted for the cycle
-            $result = mysql_query("CALL check_for_existing_scorsheets('$teamname', '$username', '$cycleStart', '$cycleEnd');");
-			
-            //Since no scoresheets were returned, add valid entry into database
-            if( mysql_num_rows( $result ) == 0)
+            //$result = mysql_query("CALL check_for_existing_scoresheets('$teamname', '$username', '$cycleStart', '$cycleEnd');");
+			if(!$result = $db->query("CALL check_for_existing_scoresheets('$teamname', '$username', '$cycleStart', '$cycleEnd');", MYSQLI_STORE_RESULT))
             {
-            
+                die('There was an error running the query [' . $db->error . ']');
+            }
+            //Since no scoresheets were returned, add valid entry into database
+            if( $result->num_rows == 0)
+            {
+                
+                while($db->more_results())
+                {
+                    $db->next_result();
+                    if($result = $db->store_result())
+                    {
+                       $result->free();
+                    }
+                }
                 //check if there was no error during the file upload
                 if ($photoData['error']==0)
                 {
-                    $result = mysql_query("CALL submit_weight('$teamname', '$username', '$datesubmitted');");
-                    if (!$result['error'])
+                    //inserted in the database, go on with file storage
+                    //database link
+                    
+                    //$result = mysqli_query("CALL submit_weight('$teamname', '$username', '$datesubmitted');");
+                    
+                    if (!$result = $db->query("insert into scoresheet(competitionid, playerid, datesubmitted, isverified, scoretype) select competition.competitionid, player.playerid, '$datesubmitted', 0, 'Weight' from player inner join player_party on player.playerID = player_party.playerID inner join party on party.partyid = player_party.partyID inner join competition on competition.partyid = party.partyid where  party.partyName = '$teamname' AND player.username = '$username' ;"))
                     {
+                        die('failed at submit weight: [' . $db->error . '] [' . $teamname . '][' . $username . '][' . $datesubmitted . ']');
+                    }
+                    
                         
-                        //inserted in the database, go on with file storage
-                        //database link
-                        $link = mysqli_connect("localhost","root","root");
-                        mysqli_select_db($link, "senior");
+                    //get the last automatically generated ID
+                    $IdPhoto = $db->insert_id;
                         
-                        //get the last automatically generated ID
-                        $IdPhoto = mysqli_insert_id($link);
-                        
-                        //move the temporarily stored file to a convenient location
-                        if (move_uploaded_file($photoData['tmp_name'], "upload/".$IdPhoto.".jpg"))
-                        {
-                            //file moved, all good, generate thumbnail
-                            //thumb("upload/".$IdPhoto.".jpg", 180);
-                            //echo json_encode(array('successful'=>1));
-                            echo "TRUE";
-                        }
-                        else
-                        {
-                            //errorJson('Upload on server problem');
-                            echo "Upload on server proble";
-                        };
-                        
+                    //move the temporarily stored file to a convenient location
+                    if (move_uploaded_file($photoData['tmp_name'], "upload/".$IdPhoto.".jpg"))
+                    {
+                        //file moved, all good, generate thumbnail
+                        //thumb("upload/".$IdPhoto.".jpg", 180);
+                        //echo json_encode(array('successful'=>1));
+                        echo "TRUE";
                     }
                     else
                     {
-                        //errorJson('Upload database problem.'.$result['error']);
-                        echo "Upload database problem";
-                    }
+                        //errorJson('Upload on server problem');
+                        echo "Upload on server proble";
+                    };
+                        
+                    
                     
                 } 
                 else 
@@ -153,7 +193,7 @@ class SubmitWeightAPI
             }
             else
             {
-                echo mysql_num_rows($result);
+                echo "A scoresheet for this cycle already exists";
             }
             
         }
@@ -162,6 +202,8 @@ class SubmitWeightAPI
             echo "need username, password1";
         }
     }
+    
+    
 
 }
 

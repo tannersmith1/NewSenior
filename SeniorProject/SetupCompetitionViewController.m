@@ -58,12 +58,27 @@
 {
     //[self.whirligig stopAnimating];
     //self.resultsTextView.text = msg;
-    NSLog(msg);
+    
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
+
 }
 
 - (void)setupCompetitionFailed:(NSString *)msg
 {
-    NSLog(msg);
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Failed"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
+
 }
 
 - (IBAction)createButtonPressed:(id)sender {
