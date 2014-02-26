@@ -8,12 +8,49 @@
 
 #import "VerifyScoreViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "cCompetitionManager.h"
 @interface VerifyScoreViewController ()
 
 @end
 
 @implementation VerifyScoreViewController
-- (IBAction)verifyButtonPressed:(id)sender {
+
+- (IBAction)hideKeyboard:(id)sender
+{
+    [self.weightField resignFirstResponder];
+}
+
+- (IBAction)verifyButtonPressed:(id)sender
+{
+    if (![self.weightField.text isEqualToString:@""])
+    {
+        //Make post to verify score
+        cCompetitionManager *mgr = [[cCompetitionManager alloc] init];
+        mgr.delegate = self;
+        [mgr verifyWeight:self.sheet.scoreID withValue:self.weightField.text];
+    }
+}
+
+- (void)verifyWeightSuccess:(NSString *)msg
+{
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)verifyWeightFailed:(NSString *)msg
+{
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Failure"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,20 +66,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //Retrieve image for score sheet verification
     NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-    NSString *url = [NSString stringWithFormat:@"%@/upload/%@.jpg", baseURL, self.sheet.scoreID];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFImageResponseSerializer serializer];
+    NSString *urlString = [NSString stringWithFormat:@"%@/upload/%@.jpg", baseURL, self.sheet.scoreID];
 
-    [manager GET:url parameters:nil
-    success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        self.previewImageField.image = responseObject;
-    }
-    failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-         
-    }];
+
+    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlString]];
+    self.previewImageField.image = [UIImage imageWithData: imageData];
 }
 
 - (void)didReceiveMemoryWarning

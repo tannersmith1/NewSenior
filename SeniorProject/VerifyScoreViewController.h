@@ -13,4 +13,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *weightField;
 @property (weak, nonatomic) IBOutlet UIImageView *previewImageField;
 @property (strong, nonatomic)cScoreSheet *sheet;
+
+- (void)verifyWeightSuccess:(NSString *)msg;
+- (void)verifyWeightFailed:(NSString *)msg;
+
 @end

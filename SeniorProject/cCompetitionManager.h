@@ -15,4 +15,6 @@
 - (void)createCompStarting:(NSDate *)startDate withFreq:(NSString *)freq andCycles:(NSNumber *)cycles andElim:(NSString *)elim;
 - (void)submitWeightWithPhoto:(UIImage *)weightPhoto;
 - (void)getScoreSheet:(NSString *)isVerified;
+- (void)verifyWeight:(NSString *)scoresheetID withValue:(NSString *)weight;
+- (void)getScoreBoard:(NSString *)teamname;
 @end

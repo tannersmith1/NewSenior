@@ -67,13 +67,9 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
-    NSIndexPath *indexPath = [self.scoreTable indexPathForCell:sender];
-    //Get the selected object in order to fill out the detail view
-
-        
     VerifyScoreViewController *dest = [segue destinationViewController];
-    dest.sheet = [self.scoreArray objectAtIndex:indexPath.row];
+
+    dest.sheet = self.scoreSheet;
 
         
     //NSLog(@"The title is: %@, and the info is: %@.",dest.locTitle,dest.locInfo);
@@ -83,6 +79,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Manual segue to screen with photo and weight input fields
+    self.scoreSheet = [self.scoreArray objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"verifyScoreSheetSegue" sender:self];
 }
 

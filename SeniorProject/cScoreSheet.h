@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong)NSString *scoreID;
 @property (nonatomic, strong)NSString *username;
+@property (nonatomic, strong)NSString *scorePercent;
 
 @end

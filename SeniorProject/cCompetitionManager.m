@@ -11,8 +11,98 @@
 #import "cUserSingleton.h"
 #import "SubmitWeightViewController.h"
 #import "UnverifiedScoreMenuViewController.h"
+#import "VerifyScoreViewController.h"
+#import "ScoreBoardViewController.h"
 
 @implementation cCompetitionManager
+
+- (NSArray *)parseScoreboardData:(NSData *)data
+{
+    NSMutableArray *scores = [[NSMutableArray alloc]init];
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    for (NSDictionary *row in json)
+    {
+        NSString *startWeight = [row objectForKey:@"startweight"];
+        NSString *endWeight = [row objectForKey:@"endweight"];
+        double weightLost = [startWeight intValue] - [endWeight intValue];
+        double weightPercent = weightLost / (double)[startWeight intValue];
+        cScoreSheet *ss = [[cScoreSheet alloc]init];
+        ss.username = [row objectForKey:@"username"];
+        ss.scorePercent = [NSString stringWithFormat:@"%f", weightPercent];
+        [scores addObject:ss];
+        
+    }
+    NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"scorePercent"
+                                                                 ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+    NSArray *sortedArray = [scores sortedArrayUsingDescriptors:sortDescriptors];
+    
+    return sortedArray;
+}
+
+- (void)getScoreBoard:(NSString *)teamname
+{
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/getScoreBoard.php", baseURL];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *params = @{@"teamname": teamname};
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+         
+         
+         if ([text isEqualToString:@"FALSE"])
+         {
+             [self.delegate getScoreBoardFailed:text];
+             
+             
+         }
+         else
+         {
+             //Parse the data and send it to UI
+             [self.delegate getScoreBoardSuccess:[self parseScoreboardData:responseObject]];
+         }
+         
+         
+     }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self.delegate getScoreSheetFailed:[error localizedDescription]];
+     }];
+}
+
+- (void)verifyWeight:(NSString *)scoresheetID withValue:(NSString *)weight
+{
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/verifyWeight.php", baseURL];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *params = @{@"scoresheetid": scoresheetID,
+                             @"weight": weight};
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+         
+         
+         if ([text isEqualToString:@"TRUE"])
+         {
+             [self.delegate verifyWeightSuccess:text];
+             
+             
+         }
+         else
+         {
+             [self.delegate verifyWeightFailed:text];
+         }
+         
+         
+     }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self.delegate getScoreSheetFailed:[error localizedDescription]];
+     }];
+}
 
 - (void)submitWeightWithPhoto:(UIImage *)weightPhoto
 {
