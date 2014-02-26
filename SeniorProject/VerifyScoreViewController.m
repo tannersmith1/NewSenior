@@ -30,7 +30,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
-    NSString *url = [NSString stringWithFormat:@"%@/upload/%@.jpg", baseURL, self.sheet.scoreID];
+    NSString *urlString = [NSString stringWithFormat:@"%@/upload/%@.jpg", baseURL, self.sheet.scoreID];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlString]];
+    self.previewImageField.image = [UIImage imageWithData: imageData];
+
+    /*
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
 
@@ -43,6 +49,7 @@
     {
          
     }];
+     */
 }
 
 - (void)didReceiveMemoryWarning

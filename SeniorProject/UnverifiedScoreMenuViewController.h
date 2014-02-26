@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "cScoreSheet.h"
 
 @interface UnverifiedScoreMenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)NSArray *scoreArray;
 @property (nonatomic, strong)IBOutlet UITableView *scoreTable;
+@property (nonatomic, strong)cScoreSheet *scoreSheet;
 
 - (void)getScoreSheetSuccess:(NSString *)msg;
 - (void)getScoreSheetFailed:(NSString *)msg;
