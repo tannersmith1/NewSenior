@@ -53,6 +53,7 @@
 		519E3C031891FD43005375DA /* cPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C021891FD43005375DA /* cPlayerManager.m */; };
 		519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E3C071893688F005375DA /* JoinTeamViewController.m */; };
 		51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */; };
+		51C5D91E18C7E0C300605FA7 /* MileTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C5D91D18C7E0C300605FA7 /* MileTrackerViewController.m */; };
 		51E240DA1898FED60038A70E /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E240D91898FED60038A70E /* RosterViewController.m */; };
 		51F18BE918BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F18BE818BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m */; };
 		51F18BEC18BD22A800CD7353 /* cScoreSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F18BEB18BD22A800CD7353 /* cScoreSheet.m */; };
@@ -147,6 +148,8 @@
 		519E3C071893688F005375DA /* JoinTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinTeamViewController.m; sourceTree = "<group>"; };
 		51A0D19B1898C6AB0090FCA8 /* TeamMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMenuViewController.h; sourceTree = "<group>"; };
 		51A0D19C1898C6AB0090FCA8 /* TeamMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMenuViewController.m; sourceTree = "<group>"; };
+		51C5D91C18C7E0C300605FA7 /* MileTrackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MileTrackerViewController.h; sourceTree = "<group>"; };
+		51C5D91D18C7E0C300605FA7 /* MileTrackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MileTrackerViewController.m; sourceTree = "<group>"; };
 		51E240D81898FED60038A70E /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		51E240D91898FED60038A70E /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
 		51F18BE718BD0B0000CD7353 /* UnverifiedScoreMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnverifiedScoreMenuViewController.h; sourceTree = "<group>"; };
@@ -329,6 +332,8 @@
 				51F18BF318BD5D1E00CD7353 /* VerifyScoreViewController.m */,
 				519E37D018BDC3EE0090024B /* ScoreBoardViewController.h */,
 				519E37D118BDC3EE0090024B /* ScoreBoardViewController.m */,
+				51C5D91C18C7E0C300605FA7 /* MileTrackerViewController.h */,
+				51C5D91D18C7E0C300605FA7 /* MileTrackerViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				513F889F1886624600374B02 /* AFURLConnectionOperation.m in Sources */,
 				513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */,
 				51F18BEC18BD22A800CD7353 /* cScoreSheet.m in Sources */,
+				51C5D91E18C7E0C300605FA7 /* MileTrackerViewController.m in Sources */,
 				513F889C1886624600374B02 /* AFHTTPSessionManager.m in Sources */,
 				513F88A01886624600374B02 /* AFURLRequestSerialization.m in Sources */,
 				51A0D19D1898C6AB0090FCA8 /* TeamMenuViewController.m in Sources */,

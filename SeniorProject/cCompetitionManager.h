@@ -1,7 +1,7 @@
 //
 //  cCompetitionManager.h
 //  SeniorProject
-//
+///Users/tannersmith/Documents/SeniorProject/NewSenior/SeniorProject/MileTrackerViewController.h
 //  Created by Tanner Smith on 2/18/14.
 //  Copyright (c) 2014 Tanner Smith. All rights reserved.
 //
