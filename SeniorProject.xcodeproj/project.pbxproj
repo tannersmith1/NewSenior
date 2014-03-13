@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		510E46D218D23CF900E9D61D /* RouteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46D118D23CF900E9D61D /* RouteMapViewController.m */; };
+		510E46D418D243F400E9D61D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 510E46D318D243F400E9D61D /* MapKit.framework */; };
 		513F87A91886441A00374B02 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F87A81886441A00374B02 /* LoginViewController.m */; };
 		513F87AC1886443000374B02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F87AB1886443000374B02 /* RegisterViewController.m */; };
 		513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F88881886624600374B02 /* AFHTTPRequestOperation.m */; };
@@ -46,6 +48,7 @@
 		5191E9FF18B93D2200201F2E /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5191E9FE18B93D2200201F2E /* images.jpg */; };
 		5191EA0118B9760A00201F2E /* login.php in Resources */ = {isa = PBXBuildFile; fileRef = 5191EA0018B9760A00201F2E /* login.php */; };
 		5191EA0318B9A5FD00201F2E /* getParty.php in Resources */ = {isa = PBXBuildFile; fileRef = 5191EA0218B9A5FD00201F2E /* getParty.php */; };
+		519935CA18D23556003CCDCF /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 519935C918D23556003CCDCF /* PSLocationManager.m */; };
 		519E37CD18BDA9EC0090024B /* verifyWeight.php in Resources */ = {isa = PBXBuildFile; fileRef = 519E37CC18BDA9EC0090024B /* verifyWeight.php */; };
 		519E37CF18BDBFFB0090024B /* getScoreBoard.php in Resources */ = {isa = PBXBuildFile; fileRef = 519E37CE18BDBFFB0090024B /* getScoreBoard.php */; };
 		519E37D218BDC3EE0090024B /* ScoreBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 519E37D118BDC3EE0090024B /* ScoreBoardViewController.m */; };
@@ -72,6 +75,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		510E46D018D23CF900E9D61D /* RouteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteMapViewController.h; sourceTree = "<group>"; };
+		510E46D118D23CF900E9D61D /* RouteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteMapViewController.m; sourceTree = "<group>"; };
+		510E46D318D243F400E9D61D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		513F87A71886441A00374B02 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		513F87A81886441A00374B02 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		513F87AA1886443000374B02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -136,6 +142,8 @@
 		5191E9FE18B93D2200201F2E /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
 		5191EA0018B9760A00201F2E /* login.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = login.php; path = ../../../../../../Applications/MAMP/htdocs/login.php; sourceTree = "<group>"; };
 		5191EA0218B9A5FD00201F2E /* getParty.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = getParty.php; path = ../../../../../../Applications/MAMP/htdocs/getParty.php; sourceTree = "<group>"; };
+		519935C818D23556003CCDCF /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
+		519935C918D23556003CCDCF /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
 		519E37CC18BDA9EC0090024B /* verifyWeight.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = verifyWeight.php; path = PHP/verifyWeight.php; sourceTree = SOURCE_ROOT; };
 		519E37CE18BDBFFB0090024B /* getScoreBoard.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = getScoreBoard.php; path = ../../../../../../Applications/MAMP/htdocs/getScoreBoard.php; sourceTree = "<group>"; };
 		519E37D018BDC3EE0090024B /* ScoreBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreBoardViewController.h; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				510E46D418D243F400E9D61D /* MapKit.framework in Frameworks */,
 				518C5BB0188368C100D8FF8F /* CoreGraphics.framework in Frameworks */,
 				518C5BB2188368C100D8FF8F /* UIKit.framework in Frameworks */,
 				518C5BAE188368C100D8FF8F /* Foundation.framework in Frameworks */,
@@ -247,6 +256,7 @@
 		518C5BAC188368C100D8FF8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				510E46D318D243F400E9D61D /* MapKit.framework */,
 				518C5BAD188368C100D8FF8F /* Foundation.framework */,
 				518C5BAF188368C100D8FF8F /* CoreGraphics.framework */,
 				518C5BB1188368C100D8FF8F /* UIKit.framework */,
@@ -258,6 +268,7 @@
 		518C5BB3188368C100D8FF8F /* SeniorProject */ = {
 			isa = PBXGroup;
 			children = (
+				519935C718D23526003CCDCF /* PSLocationManager */,
 				513F88A31886754A00374B02 /* Server */,
 				513F88861886624600374B02 /* AFNetworking */,
 				518C5BE718836F4800D8FF8F /* BOL */,
@@ -334,6 +345,8 @@
 				519E37D118BDC3EE0090024B /* ScoreBoardViewController.m */,
 				51C5D91C18C7E0C300605FA7 /* MileTrackerViewController.h */,
 				51C5D91D18C7E0C300605FA7 /* MileTrackerViewController.m */,
+				510E46D018D23CF900E9D61D /* RouteMapViewController.h */,
+				510E46D118D23CF900E9D61D /* RouteMapViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -372,6 +385,15 @@
 				5191E9FE18B93D2200201F2E /* images.jpg */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		519935C718D23526003CCDCF /* PSLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				519935C818D23556003CCDCF /* PSLocationManager.h */,
+				519935C918D23556003CCDCF /* PSLocationManager.m */,
+			);
+			name = PSLocationManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -490,6 +512,7 @@
 				518C5BF0188382CE00D8FF8F /* cUserSingleton.m in Sources */,
 				513F889F1886624600374B02 /* AFURLConnectionOperation.m in Sources */,
 				513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */,
+				510E46D218D23CF900E9D61D /* RouteMapViewController.m in Sources */,
 				51F18BEC18BD22A800CD7353 /* cScoreSheet.m in Sources */,
 				51C5D91E18C7E0C300605FA7 /* MileTrackerViewController.m in Sources */,
 				513F889C1886624600374B02 /* AFHTTPSessionManager.m in Sources */,
@@ -503,6 +526,7 @@
 				518C5BC4188368C100D8FF8F /* MainMenuViewController.m in Sources */,
 				5191E9AA18B3F62000201F2E /* SetupCompetitionViewController.m in Sources */,
 				519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */,
+				519935CA18D23556003CCDCF /* PSLocationManager.m in Sources */,
 				513F889B1886624600374B02 /* AFHTTPRequestOperationManager.m in Sources */,
 				51E240DA1898FED60038A70E /* RosterViewController.m in Sources */,
 				51F18BE918BD0B0000CD7353 /* UnverifiedScoreMenuViewController.m in Sources */,

@@ -7,18 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
+#import "PSLocationManager.h"
 
-@interface MileTrackerViewController : UIViewController <CLLocationManagerDelegate>
+@interface MileTrackerViewController : UIViewController <PSLocationManagerDelegate>
 
-@property (nonatomic,strong)CLLocationManager *locationManager;
-@property (nonatomic,strong)NSMutableArray *locationHistory;
-@property (nonatomic, strong)NSDate *startTimestamp;
-@property (nonatomic)NSTimeInterval lastDistanceCalculation;
-@property (nonatomic,strong)CLLocation *bestEffortAtLocation;
-@property (nonatomic, strong)CLLocation *lastBestLocation;
-@property (nonatomic)CLLocationDistance totalDistance;
-@property (weak, nonatomic) IBOutlet UILabel *distance;
-@property (weak, nonatomic) IBOutlet UITextView *debugTextView;
+@property (nonatomic, weak) IBOutlet UILabel *strengthLabel;
+@property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
+@property (nonatomic, strong) NSMutableArray *routeCoordinates;
+
+- (IBAction)startButtonPressed:(id)sender;
+- (IBAction)stopButtonPressed:(id)sender;
+- (IBAction)routeMapsPressed:(id)sender;
 
 @end

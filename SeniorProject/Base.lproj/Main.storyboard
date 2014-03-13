@@ -268,7 +268,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startButtonPressed:" destination="4z5-kS-9Jf" eventType="touchUpInside" id="BbH-G0-4rm"/>
+                                    <action selector="startButtonPressed:" destination="4z5-kS-9Jf" eventType="touchUpInside" id="Wrd-iF-Y4x"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-70-au7">
@@ -278,7 +278,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopButtonPressed:" destination="4z5-kS-9Jf" eventType="touchUpInside" id="3tA-l8-DkH"/>
+                                    <action selector="stopButtonPressed:" destination="4z5-kS-9Jf" eventType="touchUpInside" id="RCY-Ce-j5S"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-8N-vR2">
@@ -288,18 +288,73 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Signal:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAa-vf-mMX">
+                                <rect key="frame" x="20" y="352" width="53" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOq-Pm-Ltl">
+                                <rect key="frame" x="117" y="347" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04D-7h-1Aq">
+                                <rect key="frame" x="122" y="428" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Map Route">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="routeMapsPressed:" destination="4z5-kS-9Jf" eventType="touchUpInside" id="k7N-h2-nPA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vL2-gY-EqP"/>
                     <connections>
-                        <outlet property="debugTextView" destination="xUa-8N-vR2" id="2KE-KE-UDJ"/>
-                        <outlet property="distance" destination="DQf-qE-y47" id="d25-1n-YTA"/>
+                        <outlet property="distanceLabel" destination="DQf-qE-y47" id="7R8-Oe-oNO"/>
+                        <outlet property="strengthLabel" destination="DOq-Pm-Ltl" id="opC-af-bUZ"/>
+                        <segue destination="tsb-mx-EN6" kind="push" identifier="routeMapSegue" id="Zl1-ww-lq8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tU3-IX-qc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1607" y="865"/>
+        </scene>
+        <!--Route Map View Controller-->
+        <scene sceneID="rV1-XG-IvS">
+            <objects>
+                <viewController id="tsb-mx-EN6" customClass="RouteMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mpZ-XS-fKY"/>
+                        <viewControllerLayoutGuide type="bottom" id="mYa-IL-8F6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hRi-E7-X6F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="satellite" translatesAutoresizingMaskIntoConstraints="NO" id="Jzu-p7-j4V">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="tsb-mx-EN6" id="PKo-FN-uy3"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="F3P-1Z-wQO"/>
+                    <connections>
+                        <outlet property="mapView" destination="Jzu-p7-j4V" id="b31-hh-29f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6bs-Cx-RJH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2077" y="844"/>
         </scene>
         <!--Team View Controller-->
         <scene sceneID="VrK-F9-tBp">

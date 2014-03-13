@@ -6,5 +6,5 @@
   Copyright (c) 2014 Tanner Smith. All rights reserved.
 */
 
-//"BaseURL" = "http:localhost:8888";
-"BaseURL" = "http:96.39.177.153/senior";
+"BaseURL" = "http:localhost:8888";
+//"BaseURL" = "http:96.39.177.153/senior";

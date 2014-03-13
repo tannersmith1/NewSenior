@@ -5,13 +5,8 @@
 //  Created by Tanner Smith on 3/5/14.
 //  Copyright (c) 2014 Tanner Smith. All rights reserved.
 //
-#define kDistanceCalculationInterval 10 // the interval (seconds) at which we calculate the user's distance
-#define kNumLocationHistoriesToKeep 5 // the number of locations to store in history so that we can look back at them and determine which is most accurate
-#define kValidLocationHistoryDeltaInterval 3 // the maximum valid age in seconds of a location stored in the location history
-#define kMinLocationsNeededToUpdateDistance 3 // the number of locations needed in history before we will even update the current distance
-#define kRequiredHorizontalAccuracy 40.0f // the required accuracy in meters for a location.  anything above this number will be discarded
-
 #import "MileTrackerViewController.h"
+#import "RouteMapViewController.h"
 
 @interface MileTrackerViewController ()
 
@@ -19,77 +14,102 @@
 
 @implementation MileTrackerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize strengthLabel = _strengthLabel;
+@synthesize distanceLabel = _distanceLabel;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    if ([CLLocationManager locationServicesEnabled]) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    }
+	// Do any additional setup after loading the view, typically from a nib.
     
-    self.locationHistory = [[NSMutableArray alloc]init];
+    [PSLocationManager sharedLocationManager].delegate = self;
+    self.routeCoordinates = [[NSMutableArray alloc]init];
+    
 }
 
-- (void)didReceiveMemoryWarning
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    RouteMapViewController *dest = (RouteMapViewController *)[segue destinationViewController];
+    
+    dest.routeCoordinates = self.routeCoordinates;
+}
+
+
+
+- (IBAction)routeMapsPressed:(id)sender
+{
+    //Manual segue to new view
+    //if ([self.routeCoordinates count] > 1)
+    {
+        [self performSegueWithIdentifier:@"routeMapSegue" sender:self];
+    }
+    
 }
 
 - (IBAction)startButtonPressed:(id)sender
 {
-    [self.locationManager startUpdatingLocation];
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    [[PSLocationManager sharedLocationManager] startLocationUpdates];
 }
+
 - (IBAction)stopButtonPressed:(id)sender
 {
-    [self.locationManager stopUpdatingLocation];
+    [[PSLocationManager sharedLocationManager] stopLocationUpdates];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    } else {
+        return YES;
+    }
+}
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+#pragma mark PSLocationManagerDelegate
+
+- (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed
+{
+    NSString *s = [NSString stringWithFormat:@"Lat:%f, Long:%f", waypoint.coordinate.latitude, waypoint.coordinate.longitude];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Coordinates"
+                                                    message: s
+                                                   delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
     
-
-        // test the age of the location measurement to determine if the measurement is cached
-        // in most cases you will not want to rely on cached measurements
-        NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
-
-        if (locationAge > 5.0) return;
-        
-        // test that the horizontal accuracy does not indicate an invalid measurement
-        if (newLocation.horizontalAccuracy < 0) return;
-        
-
-        if (newLocation.horizontalAccuracy <= 30)
-        {
-            if (self.lastBestLocation != Nil)
-            {
-                CLLocationDistance distance = [newLocation distanceFromLocation:self.lastBestLocation];
-                self.totalDistance += distance;
-                self.distance.text = [NSString stringWithFormat:@"%.2f m",self.totalDistance];
-                NSString *debugText = self.debugTextView.text;
-            self.debugTextView.text = [NSString stringWithFormat:@"%@\nNew:%f,%f",debugText, newLocation.coordinate.latitude, newLocation.coordinate.longitude];
-            }
-            else
-            {
-                
-            }
-            self.lastBestLocation = newLocation;
-            
-        }
+    [self.routeCoordinates addObject:waypoint];
     
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager signalStrengthChanged:(PSLocationManagerGPSSignalStrength)signalStrength {
+    NSString *strengthText;
+    if (signalStrength == PSLocationManagerGPSSignalStrengthWeak) {
+        strengthText = NSLocalizedString(@"Weak", @"");
+    } else if (signalStrength == PSLocationManagerGPSSignalStrengthStrong) {
+        strengthText = NSLocalizedString(@"Strong", @"");
+    } else {
+        strengthText = NSLocalizedString(@"...", @"");
+    }
     
+    self.strengthLabel.text = strengthText;
+}
+
+- (void)locationManagerSignalConsistentlyWeak:(PSLocationManager *)locationManager {
+    self.strengthLabel.text = NSLocalizedString(@"Consistently Weak", @"");
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
+    // location services is probably not enabled for the app
+    self.strengthLabel.text = NSLocalizedString(@"Unable to determine location", @"");
 }
 
 @end
