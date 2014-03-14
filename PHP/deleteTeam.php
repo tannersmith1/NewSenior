@@ -71,18 +71,13 @@ class DeleteTeamAPI
 	// Constructor - open DB connection
 	function __construct() 
 	{		
-		$conn = mysql_connect('localhost', 'root', 'root');
-		if(!mysql_select_db("senior"))
-		{
-			echo "error1122";
-			exit;
-		}
+
 	}
 
 	// Destructor - close DB connection
 	function __destruct() 
 	{
-		$this->db->close();
+		//$this->db->close();
 	}
 
 	//creates the account of the id that is posted
@@ -90,19 +85,33 @@ class DeleteTeamAPI
 	{
 	    	if (isset($_POST["username"]) && isset($_POST["teamname"]) )
 	    	{
+			$db = new mysqli('localhost', 'root', 'root', 'senior');
+            if($db->connect_errno > 0)
+            {
+                die('Unable to connect to database [' . $db->connect_error . ']');
+            }
+			
 			//mysql_real_escape_string() used to sainitize input strings
 			$username = mysql_real_escape_string($_POST["username"]);
 			$teamname = mysql_real_escape_string($_POST["teamname"]);
 			//checks to see if the team exists
-			$result = mysql_query("select party.partyid from party where partyname = '$teamname'");
-			if( mysql_num_rows( $result ) == 0)
+			
+			if(!$result = $db->query("select party.partyid from party where partyname = '$teamname'"))
+            {
+                die('Error on party lookup" [' . $db->error . ']');
+            }
+			if( $result->num_rows == 0)
 			{
 				echo "FALSE";
 			}
 			else
 			{
                 //Team exists, so delete it
-                $result = mysql_query("delete from party where partyname = '$teamname'");
+				if(!$result = $db->query("delete from party where partyname = '$teamname'"))
+				{
+					die('Error on party lookup" [' . $db->error . ']');
+				}
+				
                 echo "TRUE";
 			}
 		}

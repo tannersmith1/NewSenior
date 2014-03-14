@@ -76,7 +76,7 @@ class GetScoreSheetsAPI
 	// Destructor - close DB connection
 	function __destruct() 
 	{
-		$this->db->close();
+		//$this->db->close();
 	}
 
 	//Return all the members given a party name
