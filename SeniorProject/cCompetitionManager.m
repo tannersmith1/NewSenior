@@ -24,6 +24,9 @@
     {
         NSString *startWeight = [row objectForKey:@"startweight"];
         NSString *endWeight = [row objectForKey:@"endweight"];
+        if (startWeight == [NSNull null]) {
+            startWeight = [NSString stringWithString:endWeight];
+        }
         double weightLost = [startWeight intValue] - [endWeight intValue];
         double weightPercent = weightLost / (double)[startWeight intValue];
         cScoreSheet *ss = [[cScoreSheet alloc]init];
