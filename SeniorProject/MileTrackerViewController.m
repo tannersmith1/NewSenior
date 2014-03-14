@@ -7,6 +7,7 @@
 //
 #import "MileTrackerViewController.h"
 #import "RouteMapViewController.h"
+#import "cMileManager.h"
 
 @interface MileTrackerViewController ()
 
@@ -24,6 +25,69 @@
     
     [PSLocationManager sharedLocationManager].delegate = self;
     self.routeCoordinates = [[NSMutableArray alloc]init];
+    
+}
+
+- (void)saveRouteSuccess:(NSString *)msg;
+{
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
+}
+
+- (void)saveRouteFailed:(NSString *)msg
+{
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Save Route Failure"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
+}
+
+- (void)saveRoutePressed:(id)sender
+{
+    if ([self.routeCoordinates count] > 1 && ![self.distanceLabel.text isEqualToString:@""])
+    {
+        //POST route to web server
+        cMileManager *mgr = [[cMileManager alloc] init];
+        mgr.delegate = self;
+        cRoute *route = [[cRoute alloc] init];
+        route.metersTravelled = self.distanceLabel.text;
+        route.coordinates = self.routeCoordinates;
+        route.dateSubmitted = [NSDate date];
+        //[mgr saveRoute:route];
+        
+        NSDateFormatter *fo = [[NSDateFormatter alloc] init];
+        [fo setDateFormat:@"yyyy-MM-dd"];
+        NSString *dateString = [fo stringFromDate:route.dateSubmitted];
+        NSMutableArray *latStringArray = [[NSMutableArray alloc] init];
+        NSMutableArray *longStringArray = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [route.coordinates count]; i++)
+        {
+            CLLocation *loc = [route.coordinates objectAtIndex:i];
+            NSString *latString = [NSString stringWithFormat:@"%f",loc.coordinate.latitude];
+            NSString *longString = [NSString stringWithFormat:@"%f", loc.coordinate.longitude];
+            [latStringArray addObject:latString];
+            [longStringArray addObject:longString];
+        }
+        
+        NSArray *keys = [NSArray arrayWithObjects:@"meterstravelled", @"datesubmitted", @"latitudes", @"longitudes",  nil];
+        NSArray *object = [NSArray arrayWithObjects:route.metersTravelled, dateString, latStringArray, longStringArray, nil];
+        NSDictionary *routeData = [[NSDictionary alloc]initWithObjects:object forKeys:keys];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:routeData options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        [mgr saveRoute:jsonString];
+    }
     
 }
 
@@ -76,12 +140,7 @@
 
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed
 {
-    NSString *s = [NSString stringWithFormat:@"Lat:%f, Long:%f", waypoint.coordinate.latitude, waypoint.coordinate.longitude];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Coordinates"
-                                                    message: s
-                                                   delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    
+   
     [self.routeCoordinates addObject:waypoint];
     
 }

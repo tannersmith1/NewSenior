@@ -140,10 +140,14 @@
          {
              [self.delegate deleteSuccess:@"Team does not exist"];
          }
-         else
+         else if ([text isEqualToString:@"TRUE"])
          {
              [self.delegate deleteSuccess:@"Team deleted"];
              [user.parties removeObject:user.activeParty.name];
+         }
+         else
+         {
+             [self.delegate deleteFailed:text];
          }
          
          

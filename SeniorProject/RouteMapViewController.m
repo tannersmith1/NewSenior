@@ -47,8 +47,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // unpacking an array of NSValues into memory
+    CLLocation *startPoint = [self.routeCoordinates objectAtIndex:0];
+    CLLocationCoordinate2D *points = malloc([self.routeCoordinates count] * sizeof(CLLocationCoordinate2D));
+    for(int i = 0; i < [self.routeCoordinates count]; i++) {
+        CLLocation *temp = [self.routeCoordinates objectAtIndex:i];
+        points[i] = temp.coordinate;
+    }
     
+    MKPolyline *myPolyline = [MKPolyline polylineWithCoordinates:points count:[self.routeCoordinates count]];
+    free(points);
 
+    /*
     CLLocationCoordinate2D coord[2];
     coord[0].latitude = 43.822133;
     coord[0].longitude = -122.383307;
@@ -59,10 +69,13 @@
     polyline = [MKPolyline polylineWithCoordinates:coord count:2];
     
     [self.mapView addOverlay:polyline];
+     */
+    [self.mapView addOverlay:myPolyline];
 
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coord[0], 100, 100);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(startPoint.coordinate, 100, 100);
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
     [_mapView setRegion:adjustedRegion animated:NO];
+    
 }
 
 - (void)didReceiveMemoryWarning

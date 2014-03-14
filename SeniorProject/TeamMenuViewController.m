@@ -41,6 +41,13 @@
     [self.navigationController popViewControllerAnimated:TRUE];
 
     self.resultsTextView.text = msg;
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
     
 }
 
@@ -48,6 +55,13 @@
 {
     [self.whirligig stopAnimating];
     self.resultsTextView.text = msg;
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Failure"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+    
+    [myAlertView show];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

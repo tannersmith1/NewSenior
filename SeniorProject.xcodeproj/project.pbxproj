@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		510E46D218D23CF900E9D61D /* RouteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46D118D23CF900E9D61D /* RouteMapViewController.m */; };
 		510E46D418D243F400E9D61D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 510E46D318D243F400E9D61D /* MapKit.framework */; };
+		510E46D718D266C900E9D61D /* RouteHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46D618D266C900E9D61D /* RouteHistoryViewController.m */; };
+		510E46DA18D2677600E9D61D /* cMileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46D918D2677600E9D61D /* cMileManager.m */; };
+		510E46DD18D267C500E9D61D /* cRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46DC18D267C500E9D61D /* cRoute.m */; };
 		513F87A91886441A00374B02 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F87A81886441A00374B02 /* LoginViewController.m */; };
 		513F87AC1886443000374B02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F87AB1886443000374B02 /* RegisterViewController.m */; };
 		513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F88881886624600374B02 /* AFHTTPRequestOperation.m */; };
@@ -78,6 +81,12 @@
 		510E46D018D23CF900E9D61D /* RouteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteMapViewController.h; sourceTree = "<group>"; };
 		510E46D118D23CF900E9D61D /* RouteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteMapViewController.m; sourceTree = "<group>"; };
 		510E46D318D243F400E9D61D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		510E46D518D266C900E9D61D /* RouteHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteHistoryViewController.h; sourceTree = "<group>"; };
+		510E46D618D266C900E9D61D /* RouteHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteHistoryViewController.m; sourceTree = "<group>"; };
+		510E46D818D2677600E9D61D /* cMileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cMileManager.h; sourceTree = "<group>"; };
+		510E46D918D2677600E9D61D /* cMileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cMileManager.m; sourceTree = "<group>"; };
+		510E46DB18D267C500E9D61D /* cRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cRoute.h; sourceTree = "<group>"; };
+		510E46DC18D267C500E9D61D /* cRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cRoute.m; sourceTree = "<group>"; };
 		513F87A71886441A00374B02 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		513F87A81886441A00374B02 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		513F87AA1886443000374B02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -347,6 +356,8 @@
 				51C5D91D18C7E0C300605FA7 /* MileTrackerViewController.m */,
 				510E46D018D23CF900E9D61D /* RouteMapViewController.h */,
 				510E46D118D23CF900E9D61D /* RouteMapViewController.m */,
+				510E46D518D266C900E9D61D /* RouteHistoryViewController.h */,
+				510E46D618D266C900E9D61D /* RouteHistoryViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -362,6 +373,8 @@
 				5191E9F218B4560400201F2E /* cCompetition.m */,
 				51F18BEA18BD22A800CD7353 /* cScoreSheet.h */,
 				51F18BEB18BD22A800CD7353 /* cScoreSheet.m */,
+				510E46DB18D267C500E9D61D /* cRoute.h */,
+				510E46DC18D267C500E9D61D /* cRoute.m */,
 			);
 			name = BO;
 			sourceTree = "<group>";
@@ -375,6 +388,8 @@
 				519E3C021891FD43005375DA /* cPlayerManager.m */,
 				5191E9EC18B42F9F00201F2E /* cCompetitionManager.h */,
 				5191E9ED18B42F9F00201F2E /* cCompetitionManager.m */,
+				510E46D818D2677600E9D61D /* cMileManager.h */,
+				510E46D918D2677600E9D61D /* cMileManager.m */,
 			);
 			name = BOL;
 			sourceTree = "<group>";
@@ -511,6 +526,7 @@
 				513F889D1886624600374B02 /* AFNetworkReachabilityManager.m in Sources */,
 				518C5BF0188382CE00D8FF8F /* cUserSingleton.m in Sources */,
 				513F889F1886624600374B02 /* AFURLConnectionOperation.m in Sources */,
+				510E46D718D266C900E9D61D /* RouteHistoryViewController.m in Sources */,
 				513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */,
 				510E46D218D23CF900E9D61D /* RouteMapViewController.m in Sources */,
 				51F18BEC18BD22A800CD7353 /* cScoreSheet.m in Sources */,
@@ -522,7 +538,9 @@
 				518C5BF3188382F600D8FF8F /* cPartyManager.m in Sources */,
 				5191E9EE18B42F9F00201F2E /* cCompetitionManager.m in Sources */,
 				51F18BF418BD5D1E00CD7353 /* VerifyScoreViewController.m in Sources */,
+				510E46DA18D2677600E9D61D /* cMileManager.m in Sources */,
 				513F88A21886624600374B02 /* AFURLSessionManager.m in Sources */,
+				510E46DD18D267C500E9D61D /* cRoute.m in Sources */,
 				518C5BC4188368C100D8FF8F /* MainMenuViewController.m in Sources */,
 				5191E9AA18B3F62000201F2E /* SetupCompetitionViewController.m in Sources */,
 				519E3C081893688F005375DA /* JoinTeamViewController.m in Sources */,

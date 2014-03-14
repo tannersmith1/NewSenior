@@ -18,5 +18,9 @@
 - (IBAction)startButtonPressed:(id)sender;
 - (IBAction)stopButtonPressed:(id)sender;
 - (IBAction)routeMapsPressed:(id)sender;
+- (IBAction)saveRoutePressed:(id)sender;
+
+- (void)saveRouteSuccess:(NSString *)msg;
+- (void)saveRouteFailed:(NSString *)msg;
 
 @end
