@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "416517633.023263"
+            timestampString = "416704956.117235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-submitWeightWithPhoto:"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "416517633.023263"
+            timestampString = "416704956.117235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-verifyWeight:withValue:"
             landmarkType = "5">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "416517633.023263"
+            timestampString = "416704956.117235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "-verifyWeight:withValue:"
             landmarkType = "5">
          </BreakpointContent>
@@ -442,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "416517633.023263"
+            timestampString = "416704956.117235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "-verifyWeight:withValue:"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "416517633.023263"
+            timestampString = "416704956.117235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-getScoreBoard:"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,12 +682,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SeniorProject/cCompetitionManager.m"
-            timestampString = "416517331.862891"
+            timestampString = "416704956.117235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-parseScoreboardData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SeniorProject/cCompetitionManager.m"
+            timestampString = "416705135.798113"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "-parseMileageData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SeniorProject/cCompetitionManager.m"
+            timestampString = "416705143.036454"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-getMileageScoreBoard"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SeniorProject/cCompetitionManager.m"
+            timestampString = "416705296.795917"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "-getMileageScoreBoard"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

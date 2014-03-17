@@ -12,6 +12,7 @@
 		510E46D718D266C900E9D61D /* RouteHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46D618D266C900E9D61D /* RouteHistoryViewController.m */; };
 		510E46DA18D2677600E9D61D /* cMileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46D918D2677600E9D61D /* cMileManager.m */; };
 		510E46DD18D267C500E9D61D /* cRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46DC18D267C500E9D61D /* cRoute.m */; };
+		510E46E018D6652100E9D61D /* MileageScoreboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510E46DF18D6652100E9D61D /* MileageScoreboardViewController.m */; };
 		513F87A91886441A00374B02 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F87A81886441A00374B02 /* LoginViewController.m */; };
 		513F87AC1886443000374B02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F87AB1886443000374B02 /* RegisterViewController.m */; };
 		513F889A1886624600374B02 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 513F88881886624600374B02 /* AFHTTPRequestOperation.m */; };
@@ -87,6 +88,8 @@
 		510E46D918D2677600E9D61D /* cMileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cMileManager.m; sourceTree = "<group>"; };
 		510E46DB18D267C500E9D61D /* cRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cRoute.h; sourceTree = "<group>"; };
 		510E46DC18D267C500E9D61D /* cRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cRoute.m; sourceTree = "<group>"; };
+		510E46DE18D6652100E9D61D /* MileageScoreboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MileageScoreboardViewController.h; sourceTree = "<group>"; };
+		510E46DF18D6652100E9D61D /* MileageScoreboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MileageScoreboardViewController.m; sourceTree = "<group>"; };
 		513F87A71886441A00374B02 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		513F87A81886441A00374B02 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		513F87AA1886443000374B02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -358,6 +361,8 @@
 				510E46D118D23CF900E9D61D /* RouteMapViewController.m */,
 				510E46D518D266C900E9D61D /* RouteHistoryViewController.h */,
 				510E46D618D266C900E9D61D /* RouteHistoryViewController.m */,
+				510E46DE18D6652100E9D61D /* MileageScoreboardViewController.h */,
+				510E46DF18D6652100E9D61D /* MileageScoreboardViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				518C5BEA188371FA00D8FF8F /* TeamCreationViewController.m in Sources */,
 				518C5BBA188368C100D8FF8F /* main.m in Sources */,
 				519E3C031891FD43005375DA /* cPlayerManager.m in Sources */,
+				510E46E018D6652100E9D61D /* MileageScoreboardViewController.m in Sources */,
 				518C5BED188380C200D8FF8F /* cParty.m in Sources */,
 				519E37D218BDC3EE0090024B /* ScoreBoardViewController.m in Sources */,
 			);

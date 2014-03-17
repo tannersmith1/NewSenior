@@ -17,4 +17,5 @@
 - (void)getScoreSheet:(NSString *)isVerified;
 - (void)verifyWeight:(NSString *)scoresheetID withValue:(NSString *)weight;
 - (void)getScoreBoard:(NSString *)teamname;
+- (void)getMileageScoreBoard;
 @end

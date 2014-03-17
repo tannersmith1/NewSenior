@@ -16,6 +16,67 @@
 
 @implementation cCompetitionManager
 
+- (NSArray *)parseMileageData:(NSData *)data
+{
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    NSArray *scores = [json objectForKey:@"scores"];
+    NSArray *usernames = [json objectForKey:@"usernames"];
+    
+    for (int i = 0; i < [usernames count]; i++)
+    {
+        cScoreSheet *ss = [[cScoreSheet alloc]init];
+        ss.username = [usernames objectAtIndex:i];
+        ss.scorePercent = [scores objectAtIndex:i];
+        [dataArray addObject:ss];
+    }
+    
+    NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"scorePercent"
+                                                                 ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+    NSArray *sortedArray = [dataArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    return sortedArray;
+}
+
+- (void)getMileageScoreBoard
+{
+    cUserSingleton *user = [cUserSingleton getInstance];
+    NSDateFormatter *dateform = [[NSDateFormatter alloc] init];
+    [dateform setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *startDate = [dateform stringFromDate:user.activeParty.activeCompetition.startDate];
+    NSString *baseURL = NSLocalizedString(@"BaseURL", nil);
+    NSString *url = [NSString stringWithFormat:@"%@/getMileageBoard.php", baseURL];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *params = @{@"teamname": user.activeParty.name,
+                             @"startdate": startDate};
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSString *text = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+         
+         
+         if ([text isEqualToString:@"FALSE"])
+         {
+             [self.delegate getScoreBoardFailed:text];
+             
+             
+         }
+         else
+         {
+             //Parse the data and send it to UI
+             [self.delegate getScoreBoardSuccess:[self parseMileageData:responseObject]];
+         }
+         
+         
+     }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self.delegate getScoreSheetFailed:[error localizedDescription]];
+     }];
+}
+
 - (NSArray *)parseScoreboardData:(NSData *)data
 {
     NSMutableArray *scores = [[NSMutableArray alloc]init];
@@ -118,6 +179,7 @@
     //Calculate the start date and end date for the cycle this submission belongs to, this is used to check if a submission already exists
     NSDateFormatter *dateform = [[NSDateFormatter alloc] init];
     [dateform setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
 
     //NSDate *submissionDate = [[NSDate alloc]init];
     //submissionDate = [dateform dateFromString:timeString];
